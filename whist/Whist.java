@@ -52,6 +52,7 @@ public class Whist extends CardGame {
   private final String version = "1.0";
   public final int nbPlayers = 4;
   public final int nbStartCards = 13;
+  //TODO: Move to properties file.
   public final int winningScore = 11;
   private final int handWidth = 400;
   private final int trickWidth = 40;
@@ -75,7 +76,8 @@ public class Whist extends CardGame {
   private Hand[] hands;
   private Location hideLocation = new Location(-500, - 500);
   private Location trumpsActorLocation = new Location(50, 50);
-  private boolean enforceRules=false;
+  //TODO: Move to properties file.
+  private boolean enforceRules= false;	//the rule is: next player must follow lead's suit
 
   public void setStatus(String string) { setStatusText(string); }
   
@@ -233,7 +235,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 
   public static void main(String[] args)
   {
-	// System.out.println("Working Directory = " + System.getProperty("user.dir"));
+	System.out.println("Working Directory = " + System.getProperty("user.dir"));
     new Whist();
   }
 
