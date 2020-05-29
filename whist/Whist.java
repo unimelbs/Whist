@@ -24,9 +24,11 @@ public class Whist extends CardGame {
   }
   
   final String trumpImage[] = {"bigspade.gif","bigheart.gif","bigdiamond.gif","bigclub.gif"};
+  //TODO need to pass a seed
+  //static final Random random=ThreadLocalRandom.current();
+  //TODO I've added this line to manipulate tha random generator
+	public static Random random=ThreadLocalRandom.current();
 
-  static final Random random = ThreadLocalRandom.current();
-  
   // return random Enum value
   public static <T extends Enum<?>> T randomEnum(Class<T> clazz){
       int x = random.nextInt(clazz.getEnumConstants().length);
@@ -50,6 +52,7 @@ public class Whist extends CardGame {
   }
 	 
   private final String version = "1.0";
+  //TODO: Move to properties file.
   public final int nbPlayers = 4;
   public final int nbStartCards = 13;
   //TODO: Move to properties file.
@@ -72,7 +75,8 @@ public class Whist extends CardGame {
   private Actor[] scoreActors = {null, null, null, null };
   private final Location trickLocation = new Location(350, 350);
   private final Location textLocation = new Location(350, 450);
-  private final int thinkingTime = 2000;
+  //TODO: Move to properties file.
+  private final int thinkingTime = 20;//2000;
   private Hand[] hands;
   private Location hideLocation = new Location(-500, - 500);
   private Location trumpsActorLocation = new Location(50, 50);
@@ -88,6 +92,7 @@ Font bigFont = new Font("Serif", Font.BOLD, 36);
 private void initScore() {
 	 for (int i = 0; i < nbPlayers; i++) {
 		 scores[i] = 0;
+		 //TODO Add new Player classes
 		 scoreActors[i] = new TextActor("0", Color.WHITE, bgColor, bigFont);
 		 addActor(scoreActors[i], scoreLocations[i]);
 	 }
@@ -95,35 +100,36 @@ private void initScore() {
 
 private void updateScore(int player) {
 	removeActor(scoreActors[player]);
-	scoreActors[player] = new TextActor(String.valueOf(scores[player]), Color.WHITE, bgColor, bigFont);
+	scoreActors[player] = new TextActor(String.valueOf(scores[player]), Color.PINK, bgColor, bigFont);
+	//scoreActors[player] = new TextActor(String.valueOf(scores[player]), Color.WHITE, bgColor, bigFont);
 	addActor(scoreActors[player], scoreLocations[player]);
 }
 
 private Card selected;
 
 private void initRound() {
-		 hands = deck.dealingOut(nbPlayers, nbStartCards); // Last element of hands is leftover cards; these are ignored
-		 for (int i = 0; i < nbPlayers; i++) {
-			   hands[i].sort(Hand.SortType.SUITPRIORITY, true);
-		 }
-		 // Set up human player for interaction
-		CardListener cardListener = new CardAdapter()  // Human Player plays card
-			    {
-			      public void leftDoubleClicked(Card card) { selected = card; hands[0].setTouchEnabled(false); }
-			    };
-		hands[0].addCardListener(cardListener);
-		 // graphics
-	    RowLayout[] layouts = new RowLayout[nbPlayers];
-	    for (int i = 0; i < nbPlayers; i++) {
-	      layouts[i] = new RowLayout(handLocations[i], handWidth);
-	      layouts[i].setRotationAngle(90 * i);
-	      // layouts[i].setStepDelay(10);
-	      hands[i].setView(this, layouts[i]);
-	      hands[i].setTargetArea(new TargetArea(trickLocation));
-	      hands[i].draw();
-	    }
-//	    for (int i = 1; i < nbPlayers; i++)  // This code can be used to visually hide the cards in a hand (make them face down)
-//	      hands[i].setVerso(true);
+	hands = deck.dealingOut(nbPlayers, nbStartCards); // Last element of hands is leftover cards; these are ignored
+	 for (int i = 0; i < nbPlayers; i++) {
+		   hands[i].sort(Hand.SortType.SUITPRIORITY, true);
+	 }
+	 // Set up human player for interaction
+	CardListener cardListener = new CardAdapter()  // Human Player plays card
+			{
+			  public void leftDoubleClicked(Card card) { selected = card; hands[0].setTouchEnabled(false); }
+			};
+	hands[0].addCardListener(cardListener);
+	 // graphics
+	RowLayout[] layouts = new RowLayout[nbPlayers];
+	for (int i = 0; i < nbPlayers; i++) {
+	  layouts[i] = new RowLayout(handLocations[i], handWidth);
+	  layouts[i].setRotationAngle(90 * i);
+	  // layouts[i].setStepDelay(10);
+	  hands[i].setView(this, layouts[i]);
+	  hands[i].setTargetArea(new TargetArea(trickLocation));
+	  hands[i].draw();
+	}
+	    //for (int i = 1; i < nbPlayers; i++)  // This code can be used to visually hide the cards in a hand (make them face down)
+	    //  hands[i].setVerso(true);
 	    // End graphics
  }
 
@@ -131,6 +137,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 	// Select and display trump suit
 		final Suit trumps = randomEnum(Suit.class);
 		final Actor trumpsActor = new Actor("sprites/"+trumpImage[trumps.ordinal()]);
+
 	    addActor(trumpsActor, trumpsActorLocation);
 	// End trump suit
 	Hand trick;
@@ -220,6 +227,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
   public Whist()
   {
     super(700, 700, 30);
+	//random.setSeed(30006);
     setTitle("Whist (V" + version + ") Constructed for UofM SWEN30006 with JGameGrid (www.aplu.ch)");
     setStatusText("Initializing...");
     initScore();
@@ -233,10 +241,12 @@ private Optional<Integer> playRound() {  // Returns winner, if any
     refresh();
   }
 
+
   public static void main(String[] args)
   {
 	System.out.println("Working Directory = " + System.getProperty("user.dir"));
     new Whist();
+
   }
 
 }
