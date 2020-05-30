@@ -1,3 +1,5 @@
+package core;
+
 import ch.aplu.jcardgame.CardGame;
 import ch.aplu.jcardgame.Hand;
 import ch.aplu.jcardgame.RowLayout;
@@ -39,7 +41,7 @@ public class UI extends CardGame {
     protected UI(String version, int nbPlayers){
         super(700, 700, 30);
         if (ui != null){
-            System.out.println("Singleton UI screwed up");
+            System.out.println("Singleton core.UI screwed up");
         }
         ui = this;
         setTitle("Whist (V" + version + ") Constructed for UofM SWEN30006 with JGameGrid (www.aplu.ch)");
@@ -53,12 +55,12 @@ public class UI extends CardGame {
 
     public static UI getInstance(){
         if (ui == null){
-            System.out.println("Singleton UI screwed up");
+            System.out.println("Singleton core.UI screwed up");
         }
         return ui;
     }
 
-    protected void setStatus(String string) { setStatusText(string); }
+    public void setStatus(String string) { setStatusText(string); }
 
     protected void initRound(int nbPlayers, Hand[] hands){
         RowLayout[] layouts = new RowLayout[nbPlayers];
@@ -81,7 +83,7 @@ public class UI extends CardGame {
         addActor(scoreActors[player], scoreLocations[player]);
     }
 
-    protected void displayTrumpSuit(Whist.Suit trumps){
+    protected void displayTrumpSuit(WhistGame.Suit trumps){
         trumpsActor = new Actor("sprites/"+trumpImage[trumps.ordinal()]);
         addActor(trumpsActor, trumpsActorLocation);
     }
@@ -99,7 +101,7 @@ public class UI extends CardGame {
         delay(600);
         trick.setView(this, new RowLayout(hideLocation, 0));
         trick.draw();
-        setStatusText("Player " + winner + " wins trick.");
+        setStatusText("players.Player " + winner + " wins trick.");
     }
 
     protected void endGame(Optional<Integer> winner){

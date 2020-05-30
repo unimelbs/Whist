@@ -1,7 +1,8 @@
-// LegalPlayer.java
+package players;// LegalPlayer.java
 
 import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.*;
+import core.WhistGame;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -30,7 +31,7 @@ public abstract class Player {
 
 	public abstract Card takeLead();
 
-	public abstract Card takeTurn(Whist.Suit lead);
+	public abstract Card takeTurn(WhistGame.Suit lead);
 
 
 }

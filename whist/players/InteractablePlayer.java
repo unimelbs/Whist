@@ -1,16 +1,11 @@
-// LegalPlayer.java
+package players;// LegalPlayer.java
 
 import ch.aplu.jcardgame.*;
-import ch.aplu.jgamegrid.*;
-
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.image.BufferedImage;
-import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
+import core.UI;
+import core.WhistGame;
 
 @SuppressWarnings("serial")
-public class InteractablePlayer extends Player{
+public class InteractablePlayer extends Player {
 
 	private Card selected;
 
@@ -22,7 +17,7 @@ public class InteractablePlayer extends Player{
 	public void initRound(Hand hand) {
 		super.initRound(hand);
 		// Set up human player for interaction
-		CardListener cardListener = new CardAdapter()  // Human Player plays card
+		CardListener cardListener = new CardAdapter()  // Human players.Player plays card
 		{
 			public void leftDoubleClicked(Card card) { selected = card; hand.setTouchEnabled(false); }
 		};
@@ -35,14 +30,14 @@ public class InteractablePlayer extends Player{
 	}
 
 	@Override
-	public Card takeTurn(Whist.Suit lead) {
+	public Card takeTurn(WhistGame.Suit lead) {
 		return getCardInput();
 	}
 
 	private Card getCardInput(){
 		selected = null;
 		hand.setTouchEnabled(true);
-		UI.getInstance().setStatus("Player 0 double-click on card to lead.");
+		UI.getInstance().setStatus("players.Player 0 double-click on card to lead.");
 		while (null == selected) UI.getInstance().delay(100);
 		return selected;
 	}
