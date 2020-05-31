@@ -14,13 +14,15 @@ import java.util.concurrent.ThreadLocalRandom;
 public abstract class Player {
 
 	protected Hand hand;
+	protected Random random;
 	protected int playerNb;
 	protected static final int THINKING_TIME = 2000;
 
 	public Player(int playerNb){
 		this.playerNb = playerNb;
 	}
-
+	public Player(int playerNb, Random random){
+		this.playerNb = playerNb; this.random=random;}
 	public void initRound(Hand hand){
 		this.hand = hand;
 	}
@@ -32,6 +34,7 @@ public abstract class Player {
 	public abstract Card takeLead();
 
 	public abstract Card takeTurn(WhistGame.Suit lead);
+
 
 
 }

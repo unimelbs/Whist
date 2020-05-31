@@ -25,7 +25,8 @@ public class WhistGame {
     private int[] scores = new int[nbPlayers];
     private Card selected;
     //FIXME Change modified
-    public static final Random random = ThreadLocalRandom.current();
+    public final Random random;
+    //public static final Random random = ThreadLocalRandom.current();
     public enum Suit {
         SPADES, HEARTS, DIAMONDS, CLUBS
     }
@@ -36,19 +37,19 @@ public class WhistGame {
     }
 
     // return random Enum value
-    public static <T extends Enum<?>> T randomEnum(Class<T> clazz) {
+    public  <T extends Enum<?>> T randomEnum(Class<T> clazz) {
         int x = random.nextInt(clazz.getEnumConstants().length);
         return clazz.getEnumConstants()[x];
     }
 
     // return random Card from Hand
-    public static Card randomCard(Hand hand) {
+    public Card randomCard(Hand hand) {
         int x = random.nextInt(hand.getNumberOfCards());
         return hand.get(x);
     }
 
     // return random Card from ArrayList
-    public static Card randomCard(ArrayList<Card> list) {
+    public Card randomCard(ArrayList<Card> list) {
         int x = random.nextInt(list.size());
         return list.get(x);
     }
@@ -58,7 +59,9 @@ public class WhistGame {
     }
 
     private void initRound() {
-        Hand[] hands = deck.dealingOut(nbPlayers, nbStartCards); // Last element of hands is leftover cards; these are ignored
+        //TODO I added false to below dealingOut call to prevent shuffling.
+        // Needs revision, shuffling is needed otherwise we always end up with the same game.
+        Hand[] hands = deck.dealingOut(nbPlayers, nbStartCards,false); // Last element of hands is leftover cards; these are ignored
         for (int i = 0; i < nbPlayers; i++) {
             hands[i].sort(Hand.SortType.SUITPRIORITY, true);
             players.get(i).initRound(hands[i]);
@@ -144,13 +147,15 @@ public class WhistGame {
         this.players = players;
     }
 
-    public WhistGame(int nbPlayers, int winningScore, int nbStartCards, int seed, boolean enforceRules)
+    //public WhistGame(int nbPlayers, int winningScore, int nbStartCards, int seed, boolean enforceRules)
+    public WhistGame(int nbPlayers, int winningScore, int nbStartCards, Random random, boolean enforceRules)
     {
         this.nbPlayers = nbPlayers;
         this.winningScore = winningScore;
         this.nbStartCards = nbStartCards;
-        this.seed = seed;
+        //this.seed = seed;
         this.enforceRules = enforceRules;
+        this.random = random; //new Random(seed);
         ui = new UI(version, nbPlayers);
 
     }
@@ -168,6 +173,12 @@ public class WhistGame {
         } while (!winner.isPresent());
 
         ui.endGame(winner);
+    }
+
+    //Returns one random object to all players, to play the original play
+    public Random getRandom()
+    {
+        return this.random;
     }
 
 }

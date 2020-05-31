@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Random;
 
 /**
  * Handles the complex creation of core.WhistGame based on the configuration
@@ -40,6 +41,7 @@ public class GameFactory {
     private static IGameStrategy originalStrategy;
     private static IGameStrategy legalStrategy;
     private static IGameStrategy smartStrategy;
+    private static Random random;
 
 
     private static void loadConfig() throws IOException
@@ -93,14 +95,14 @@ public class GameFactory {
         }
         //Creating random NPC players
         for (int i=0;i<nbNPCPlayers;i++) {
-            NPCPlayer p = new NPCPlayer(playerId);
+            NPCPlayer p = new NPCPlayer(playerId, random);
             p.setStrategy(originalStrategy);
             players.add(p);
             playerId++;
         }
         //Creating legal NPC players
         for (int i=0;i<nbLegalNPCPlayers;i++) {
-            NPCPlayer p = new NPCPlayer(playerId);
+            NPCPlayer p = new NPCPlayer(playerId, random);
             p.setStrategy(legalStrategy);
             players.add(p);
             playerId++;
@@ -116,6 +118,7 @@ public class GameFactory {
     public static WhistGame getInstance() throws IOException
     {
         loadConfig();
+        random = new Random(seed);
         loadStrategies();
         createGamePlayers();
         if (players.size()!=4)
@@ -126,7 +129,7 @@ public class GameFactory {
         }
 
         assert(players.size()==4);
-        instance = new WhistGame(players.size(), winningScore, nbStartCards, seed, enforceRules);
+        instance = new WhistGame(players.size(), winningScore, nbStartCards, random, enforceRules);
         System.out.printf("Original: %s, Legal: %s, Smart: %s",originalStrategy,legalStrategy,smartStrategy);
         instance.addPlayers(players);
         return instance;
