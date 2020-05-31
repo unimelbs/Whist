@@ -137,11 +137,11 @@ public class WhistGame {
 
     /**
      * Adds Players to a Whist game
-     * @param player
+     * @param players
      */
-    public void addPlayer(Player player)
+    public void addPlayers(ArrayList<Player> players)
     {
-        players.add(player);
+        this.players = players;
     }
 
     public WhistGame(int nbPlayers, int winningScore, int nbStartCards, int seed, boolean enforceRules)

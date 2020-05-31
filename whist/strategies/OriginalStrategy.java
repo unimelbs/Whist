@@ -15,4 +15,9 @@ public class OriginalStrategy implements IGameStrategy {
     public Card getTurnCard(NPCPlayer player, Hand trick) {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "TE10: Original Based Strategy smart v1.";//super.toString();
+    }
 }
