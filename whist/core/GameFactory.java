@@ -20,6 +20,7 @@ import java.util.Random;
  */
 public class GameFactory {
     public static WhistGame instance;
+    private static final int MAX_NUMBER_OF_PLAYERS=4;
     private static StrategyFactory strategyFactory;
     private static Properties config;
     private static int seed;
@@ -122,7 +123,7 @@ public class GameFactory {
         random = new Random(seed);
         loadStrategies();
         createGamePlayers();
-        if (players.size()!=4)
+        if (players.size()!=MAX_NUMBER_OF_PLAYERS)
         {
             System.out.printf("Number of players (%d) is greater than the allowed maximum of 4. Exiting..\n",
                     players.size());

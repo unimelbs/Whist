@@ -9,7 +9,7 @@ public class SmartStrategy implements IGameStrategy {
 
     @Override
     public String toString() {
-        return "TE10: Probability Based Strategy smart v1.";//super.toString();
+        return "Probability Based Smart Strategy v1.";
     }
 
     @Override

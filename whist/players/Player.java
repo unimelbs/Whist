@@ -3,6 +3,7 @@ package players;// LegalPlayer.java
 import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.*;
 import core.GameTracker;
+import core.IPlayListener;
 import core.WhistGame;
 
 import java.awt.Color;
@@ -12,7 +13,7 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 @SuppressWarnings("serial")
-public abstract class Player {
+public abstract class Player implements IPlayListener {
 
 	protected Hand hand;
 	protected Random random;
@@ -39,10 +40,21 @@ public abstract class Player {
 	public abstract Card takeLead();
 
 	public abstract Card takeTurn(Hand trick);
-	public GameTracker getGameHistory(){
+	public GameTracker getGameHistory()
+	{
 		return gameHistory;
 	}
-	public void updateGameHistory(Hand trick, int startingPlayer){
+	public void onCardPlayed(Card card, Player player)
+	{
+		this.gameHistory.addPlayedCard(card,player);
+		System.out.printf("onCardPlayed.player[%s].Gamehistory state:\n",
+				this.playerNb);
+		this.gameHistory.printTrackerState();
+	}
+	public void updateGameHistory(Hand trick, int startingPlayer)
+	{
 		this.gameHistory.addToHistory(trick, startingPlayer);
 	}
+	public int getId(){return this.playerNb;}
+
 }

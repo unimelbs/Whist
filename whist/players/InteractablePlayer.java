@@ -40,4 +40,12 @@ public class InteractablePlayer extends Player {
 		while (null == selected) UI.getInstance().delay(100);
 		return selected;
 	}
+
+	/*
+	@Override
+	public void onCardPlayed(Card card, Player player) {
+		super.onCardPlayed(card, player);
+	}
+
+	 */
 }

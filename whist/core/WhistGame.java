@@ -23,7 +23,7 @@ public class WhistGame {
     public int winningScore = 11;
     private boolean enforceRules = false;
     private int seed;
-
+    private ArrayList<IPlayListener> playListeners;
     private ArrayList<Player> players = new ArrayList<Player>();
     private UI ui;
     private int[] scores = new int[nbPlayers];
@@ -97,6 +97,10 @@ public class WhistGame {
             trick = new Hand(deck);
             selected = players.get(nextPlayer).takeLead();
             leadingPlayer = nextPlayer;
+            System.out.printf("L1: Publish card played: player(%d): Card: %s.\n",
+                    players.get(leadingPlayer).getId(),
+                    selected);
+            publishCardPlayed(selected,players.get(leadingPlayer));
             // Lead with selected card
             ui.updateTrick(trick);
             selected.setVerso(false);
@@ -112,6 +116,10 @@ public class WhistGame {
                 selected = players.get(nextPlayer).takeTurn(trick);
                 // Follow with selected card
                 ui.updateTrick(trick);
+                System.out.printf("L2: Publish card played: player(%d): Card: %s.\n",
+                        players.get(nextPlayer).getId(),
+                        selected);
+                publishCardPlayed(selected,players.get(nextPlayer));
                 selected.setVerso(false);  // In case it is upside down
                 // Check: Following card must follow suit if possible
                 if (selected.getSuit() != lead && players.get(nextPlayer).getHand().getNumberOfCardsWithSuit(lead) > 0) {
@@ -167,11 +175,16 @@ public class WhistGame {
     public void addPlayers(ArrayList<Player> players)
     {
         this.players = players;
+        for (Player p: players)
+        {
+            this.addPlayListener(p);
+        }
     }
 
     //public WhistGame(int nbPlayers, int winningScore, int nbStartCards, int seed, boolean enforceRules)
     public WhistGame(int nbPlayers, int winningScore, int nbStartCards, Random random, boolean enforceRules)
     {
+        this.playListeners = new ArrayList<IPlayListener>();
         this.nbPlayers = nbPlayers;
         this.winningScore = winningScore;
         this.nbStartCards = nbStartCards;
@@ -195,6 +208,30 @@ public class WhistGame {
         } while (!winner.isPresent());
 
         ui.endGame(winner);
+    }
+
+    /**
+     * Adds PlayListeners to the game to be notified when a plan takes place.
+     * @param pl
+     */
+    public void addPlayListener(IPlayListener pl)
+    {
+        if (playListeners.contains(pl))
+        {
+            System.out.println("Listener already added!");
+        }
+        else
+        {
+            playListeners.add(pl);
+        }
+    }
+
+    private void publishCardPlayed(Card card, Player player)
+    {
+        for (IPlayListener listener: playListeners)
+        {
+            listener.onCardPlayed(card,player);
+        }
     }
 
     //Returns one random object to all players, to play the original play

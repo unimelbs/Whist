@@ -55,4 +55,12 @@ public class NPCPlayer extends Player {
 	public WhistGame.Suit getTrumps(){
 		return trumps;
 	}
+
+	/*
+	@Override
+	public void onCardPlayed(Card card, Player player) {
+		super.onCardPlayed(card, player);
+	}
+
+	 */
 }
