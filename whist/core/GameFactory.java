@@ -15,7 +15,7 @@ import java.util.Random;
 
 /**
  * Handles the complex creation of core.WhistGame based on the configuration
- * available in whist.properties file
+ * available in original.properties file
  */
 public class GameFactory {
     public static WhistGame instance;
@@ -49,7 +49,7 @@ public class GameFactory {
         config = new Properties();
         FileReader inStream = null;
         try {
-            inStream = new FileReader("whist.properties");
+            inStream = new FileReader("original.properties");
             config.load(inStream);
             nbSmartNPCPlayers = Integer.parseInt(config.getProperty("nbSmartNPCPlayers"));
             nbNPCPlayers = Integer.parseInt(config.getProperty("nbNPCPlayers"));
@@ -127,10 +127,7 @@ public class GameFactory {
                     players.size());
             System.exit(10);
         }
-
-        assert(players.size()==4);
         instance = new WhistGame(players.size(), winningScore, nbStartCards, random, enforceRules);
-        System.out.printf("Original: %s, Legal: %s, Smart: %s",originalStrategy,legalStrategy,smartStrategy);
         instance.addPlayers(players);
         return instance;
     }

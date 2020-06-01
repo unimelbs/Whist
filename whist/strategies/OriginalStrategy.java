@@ -7,13 +7,11 @@ import java.util.Random;
 
 public class OriginalStrategy implements IGameStrategy {
 
-
     // return random Card from Hand
     public Card randomCard(Hand hand, Random random) {
         int x = random.nextInt(hand.getNumberOfCards());
         return hand.get(x);
     }
-
 
     @Override
     public Card getLeadCard(NPCPlayer player)
