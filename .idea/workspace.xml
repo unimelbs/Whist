@@ -27,40 +27,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5972c81c-ea24-44a9-b0c6-4142f52f407e" name="Default Changelist" comment="Implemented player strategies">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whist/core/PlayerHistory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Whist.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Whist.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Whist.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Whist.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/GameFactory$Mode.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/GameFactory$Mode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/core/GameFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/GameFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/GameTracker.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/GameTracker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/IPlayListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/IPlayListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/UI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/core/WhistGame$Rank.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/WhistGame$Rank.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/core/WhistGame$Suit.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/WhistGame$Suit.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/core/WhistGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/WhistGame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/exceptions/BrokeRuleException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/exceptions/BrokeRuleException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/players/InteractablePlayer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/players/InteractablePlayer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/players/InteractablePlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/players/InteractablePlayer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/players/NPCPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/players/NPCPlayer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/players/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/players/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/IGameStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/IGameStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/LegalStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/LegalStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/OriginalStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/OriginalStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/ProbabilityBasedStrategy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/StrategyFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/StrategyFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/legal.properties" beforeDir="false" afterPath="$PROJECT_DIR$/legal.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart.properties" beforeDir="false" afterPath="$PROJECT_DIR$/smart.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whist.properties" beforeDir="false" afterPath="$PROJECT_DIR$/whist.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whist/Whist.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/Whist.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whist/core/GameFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/GameFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/core/GameTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/GameTracker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whist/core/WhistGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/WhistGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/players/InteractablePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/players/InteractablePlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whist/players/NPCPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/players/NPCPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whist/players/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/players/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/strategies/LegalStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/strategies/LegalStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/strategies/OriginalStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/strategies/OriginalStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/strategies/ProbabilityBasedStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/strategies/SmartStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whist/strategies/SmartStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/strategies/SmartStrategy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +55,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
       </list>
     </option>
@@ -89,17 +72,36 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/OriginalWhist" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="core" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.Simulation.WhistTest">
     <configuration name="Whist" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="JavaSE-1.8" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -117,6 +119,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Simulation.WhistTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Whist" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Simulation" />
+      <option name="METHOD_NAME" value="WhistTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Simulation.WhistTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -131,6 +148,7 @@
       <workItem from="1590384855986" duration="2759000" />
       <workItem from="1590398115378" duration="1845000" />
       <workItem from="1590551936808" duration="7921000" />
+      <workItem from="1591013866273" duration="9115000" />
     </task>
     <servers />
   </component>
@@ -159,6 +177,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implemented player strategies" />
@@ -186,42 +205,42 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1590588095650" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1591003891437">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1591027740988">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591027740988" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591003891437" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1591003891437">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1591027740988">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591027740988" />
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591003891437" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1591003891437">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1591027740988">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591027740988" />
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591003891437" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1591003891437">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1591027740988">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591027740988" />
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591003891437" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1590592432010">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1591024567010">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1590592432010">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591024567010" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1591024567009">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1590592432010">
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1591024567009" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1591024567009">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1590592432010">
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1591024567009" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1591024567010">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1591024567010" />
     <state x="311" y="0" key="SettingsEditor" timestamp="1590988653046">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -231,21 +250,19 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591000775564" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1590995735109">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="498" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1591014108629">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="498" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.824@0.0.1536.824" timestamp="1591014108629" />
+    <state x="540" y="226" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1591014091415">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="540" y="226" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1536.824@0.0.1536.824" timestamp="1591014091415" />
+    <state x="498" y="178" width="672" height="538" key="search.everywhere.popup" timestamp="1591016118078">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="178" width="672" height="538" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1591016118078" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1590995735109" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/whist/LegalPlayer.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Whist$Whist.ic" NAME="Whist Coverage Results" MODIFIED="1590988580207" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

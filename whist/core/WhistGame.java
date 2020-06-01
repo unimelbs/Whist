@@ -14,9 +14,9 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 @SuppressWarnings("serial")
 public class WhistGame {
-    private final String version = "1.0";
+    protected final String version = "1.0";
 
-    // TODO check this, made static final to be acceessed by npc players
+    // TODO check this, made static final to be accessed by npc players
     public static int nbPlayers = 4;
     public static final Deck deck = new Deck(WhistGame.Suit.values(), WhistGame.Rank.values(), "cover");
     public int nbStartCards = 13;
@@ -24,9 +24,18 @@ public class WhistGame {
     private boolean enforceRules = false;
     private int seed;
 
-    private ArrayList<Player> players = new ArrayList<Player>();
-    private UI ui;
-    private int[] scores = new int[nbPlayers];
+
+    protected ArrayList<Player> players = new ArrayList<Player>();
+    protected Hand[] hands;
+    protected Optional<Integer> roundWinner;
+    protected WhistGame.Suit trump;
+    protected Hand trick;
+    protected int winner;
+    private Card winningCard;
+    private WhistGame.Suit lead;
+    protected int nextPlayer;
+    private int leadingPlayer;
+    protected int[] scores = new int[nbPlayers];
     private Card selected;
     //FIXME Change modified
     public final Random random;
@@ -62,101 +71,29 @@ public class WhistGame {
         return card1.getRankId() < card2.getRankId(); // Warning: Reverse rank order of cards (see comment on enum)
     }
 
-    private void initRound() {
+    protected void initRound() {
         //TODO I added false to below dealingOut call to prevent shuffling.
         // Needs revision, shuffling is needed otherwise we always end up with the same game.
         // SET SHUFFLE TO TRUE TO TEST PLAYERS
-        Hand[] hands = deck.dealingOut(nbPlayers, nbStartCards,true); // Last element of hands is leftover cards; these are ignored
+        hands = deck.dealingOut(nbPlayers, nbStartCards,true); // Last element of hands is leftover cards; these are ignored
         for (int i = 0; i < nbPlayers; i++) {
             hands[i].sort(Hand.SortType.SUITPRIORITY, true);
             players.get(i).initRound(hands[i]);
         }
-        // graphics
-        ui.initRound(nbPlayers, hands);
     }
 
-    private Optional<Integer> playRound() {  // Returns winner, if any
-        // Select and display trump suit
-        final WhistGame.Suit trumps = randomEnum(WhistGame.Suit.class);
-
-        // TODO DO THIS PROPERLY
-        for (int j=1; j<nbPlayers; j++){
-            NPCPlayer player = (NPCPlayer) players.get(j);
-            player.setTrumps(trumps);
-        }
-        ui.displayTrumpSuit(trumps);
-        // End trump suit
-        Hand trick;
-        int winner;
-        Card winningCard;
-        WhistGame.Suit lead;
-        int leadingPlayer;
-        int nextPlayer = random.nextInt(nbPlayers); // randomly select player to lead for this round
+    protected Optional<Integer> playRound() {  // Returns winner, if any
+        initializeTrump();
+        nextPlayer = random.nextInt(nbPlayers); // randomly select player to lead for this round
         for (int i = 0; i < nbStartCards; i++) {
-            //trick = new Hand(deck);
-            trick = new Hand(deck);
-            selected = players.get(nextPlayer).takeLead();
-            leadingPlayer = nextPlayer;
-            // Lead with selected card
-            ui.updateTrick(trick);
-            selected.setVerso(false);
-            // No restrictions on the card being lead
-            lead = (WhistGame.Suit) selected.getSuit();
-            selected.transfer(trick, true); // transfer to trick (includes graphic effect)
-
-            winner = nextPlayer;
-            winningCard = selected;
+            getLeadFromPlayer();
             // End Lead
             for (int j = 1; j < nbPlayers; j++) {
-                if (++nextPlayer >= nbPlayers) nextPlayer = 0;  // From last back to first
-                selected = players.get(nextPlayer).takeTurn(trick);
-                // Follow with selected card
-                ui.updateTrick(trick);
-                selected.setVerso(false);  // In case it is upside down
-                // Check: Following card must follow suit if possible
-                if (selected.getSuit() != lead && players.get(nextPlayer).getHand().getNumberOfCardsWithSuit(lead) > 0) {
-                    // Rule violation
-                    String violation = "Follow rule broken by player " + nextPlayer + " attempting to play " + selected;
-                    System.out.println(violation);
-                    if (enforceRules)
-                        try {
-                            throw (new BrokeRuleException(violation));
-                        } catch (BrokeRuleException e) {
-                            e.printStackTrace();
-                            System.out.println("A cheating player spoiled the game!");
-                            System.exit(0);
-                        }
-                }
-                // End Check
-                selected.transfer(trick, true); // transfer to trick (includes graphic effect)
-                System.out.println("winning: suit = " + winningCard.getSuit() + ", rank = " + winningCard.getRankId());
-                System.out.println(" played: suit = " + selected.getSuit() + ", rank = " + selected.getRankId());
-                if ( // beat current winner with higher card
-                        (selected.getSuit() == winningCard.getSuit() && rankGreater(selected, winningCard)) ||
-                                // trumped when non-trump was winning
-                                (selected.getSuit() == trumps && winningCard.getSuit() != trumps)) {
-                    System.out.println("NEW WINNER");
-                    winner = nextPlayer;
-                    winningCard = selected;
-                }
-                // End Follow
+               getTurnFromPlayer();
             }
-
-            ui.endTrick(trick, winner);
-            nextPlayer = winner;
-            scores[nextPlayer]++;
-            ui.updateScore(nextPlayer, scores);
-            if (winningScore == scores[nextPlayer]) return Optional.of(nextPlayer);
-
-            // update player's histories
-            // TODO DO THIS PROPERLY
-            for (int j=1; j<nbPlayers; j++){
-                NPCPlayer player = (NPCPlayer) players.get(j);
-                player.updateGameHistory(trick, leadingPlayer);
-            }
+            endTrick();
+            if (scores[nextPlayer] == winningScore) return Optional.of(nextPlayer);
         }
-
-        ui.clearTrumpSuit();
         return Optional.empty();
     }
 
@@ -169,6 +106,84 @@ public class WhistGame {
         this.players = players;
     }
 
+    /**
+     * Select and display trump suit
+     */
+    protected void initializeTrump(){
+        trump = randomEnum(WhistGame.Suit.class);
+        // TODO DO THIS PROPERLY
+        for (int j=1; j<nbPlayers; j++){
+            NPCPlayer player = (NPCPlayer) players.get(j);
+            player.setTrump(trump);
+        }
+    }
+
+    /**
+     * Gets lead card from random player
+     */
+    protected void getLeadFromPlayer(){
+        trick = new Hand(deck);
+        selected = players.get(nextPlayer).takeLead();
+        leadingPlayer = nextPlayer;
+        // Lead with selected card
+        selected.setVerso(false);
+        // No restrictions on the card being lead
+        lead = (WhistGame.Suit) selected.getSuit();
+        selected.transfer(trick, true); // transfer to trick (includes graphic effect)
+        winner = nextPlayer;
+        winningCard = selected;
+    }
+
+    /**
+     * Gets card from a player who is not playing the lead card
+     */
+    protected void getTurnFromPlayer(){
+        if (++nextPlayer >= nbPlayers) nextPlayer = 0;  // From last back to first
+        selected = players.get(nextPlayer).takeTurn(trick);
+        selected.setVerso(false);  // In case it is upside down
+        // Check: Following card must follow suit if possible
+        if (selected.getSuit() != lead && players.get(nextPlayer).getHand().getNumberOfCardsWithSuit(lead) > 0) {
+            // Rule violation
+            String violation = "Follow rule broken by player " + nextPlayer + " attempting to play " + selected;
+            System.out.println(violation);
+            if (enforceRules)
+                try {
+                    throw (new BrokeRuleException(violation));
+                } catch (BrokeRuleException e) {
+                    e.printStackTrace();
+                    System.out.println("A cheating player spoiled the game!");
+                    System.exit(0);
+                }
+        }
+        // End Check
+        selected.transfer(trick, true); // transfer to trick (includes graphic effect)
+        System.out.println("winning: suit = " + winningCard.getSuit() + ", rank = " + winningCard.getRankId());
+        System.out.println(" played: suit = " + selected.getSuit() + ", rank = " + selected.getRankId());
+        if ( // beat current winner with higher card
+                (selected.getSuit() == winningCard.getSuit() && rankGreater(selected, winningCard)) ||
+                        // trumped when non-trump was winning
+                        (selected.getSuit() == trump && winningCard.getSuit() != trump)) {
+            System.out.println("NEW WINNER");
+            winner = nextPlayer;
+            winningCard = selected;
+        }
+        // End Follow
+    }
+
+    /**
+     * Update score and player gamehistory to reflect the trick plaued
+     */
+    protected void endTrick(){
+        nextPlayer = winner;
+        scores[nextPlayer]++;
+        // update player's histories
+        // TODO DO THIS PROPERLY
+        for (int j=1; j<nbPlayers; j++){
+            NPCPlayer player = (NPCPlayer) players.get(j);
+            player.updateGameHistory(trick, leadingPlayer);
+        }
+    }
+
     //public WhistGame(int nbPlayers, int winningScore, int nbStartCards, int seed, boolean enforceRules)
     public WhistGame(int nbPlayers, int winningScore, int nbStartCards, Random random, boolean enforceRules)
     {
@@ -178,7 +193,6 @@ public class WhistGame {
         //this.seed = seed;
         this.enforceRules = enforceRules;
         this.random = random; //new Random(seed);
-        ui = new UI(version, nbPlayers);
 
     }
     public void start()
@@ -187,14 +201,10 @@ public class WhistGame {
         for (int i = 0; i < nbPlayers; i++) {
             scores[i] = 0;
         }
-
-        Optional<Integer> winner;
         do {
             initRound();
-            winner = playRound();
-        } while (!winner.isPresent());
-
-        ui.endGame(winner);
+            roundWinner = playRound();
+        } while (!roundWinner.isPresent());
     }
 
     //Returns one random object to all players, to play the original play
@@ -202,5 +212,7 @@ public class WhistGame {
     {
         return this.random;
     }
+
+    public Optional<Integer> getRoundWinner() { return roundWinner;}
 
 }

@@ -27,7 +27,7 @@ public class GameFactory {
     private static int nbHumanPlayers;
     private static boolean enforceRules;
     //legal.properties
-    private static int nbNPCPlayers;
+    private static int nbRandomNPCPlayers;
     private static int nbLegalNPCPlayers;
     private static int nbStartCards;
     private static int winningScore;
@@ -45,15 +45,15 @@ public class GameFactory {
     private static Random random;
 
 
-    private static void loadConfig() throws IOException
+    private static void readProperties() throws IOException
     {
         config = new Properties();
         FileReader inStream = null;
         try {
-            inStream = new FileReader("smart.properties");
+            inStream = new FileReader("whist.properties");
             config.load(inStream);
             nbSmartNPCPlayers = Integer.parseInt(config.getProperty("nbSmartNPCPlayers"));
-            nbNPCPlayers = Integer.parseInt(config.getProperty("nbNPCPlayers"));
+            nbRandomNPCPlayers = Integer.parseInt(config.getProperty("nbRandomNPCPlayers"));
             nbLegalNPCPlayers = Integer.parseInt(config.getProperty("nbLegalNPCPlayers"));
             seed = Integer.parseInt(config.getProperty("seed"));
             nbHumanPlayers = Integer.parseInt(config.getProperty("nbHumanPlayers"));
@@ -95,7 +95,7 @@ public class GameFactory {
             playerId++;
         }
         //Creating random NPC players
-        for (int i=0;i<nbNPCPlayers;i++) {
+        for (int i=0;i<nbRandomNPCPlayers;i++) {
             NPCPlayer p = new NPCPlayer(playerId, random);
             p.setStrategy(originalStrategy);
             players.add(p);
@@ -116,23 +116,46 @@ public class GameFactory {
             playerId++;
         }
     }
-    public static WhistGame getInstance() throws IOException
-    {
-        loadConfig();
+
+    private static void loadConfig() throws IOException{
+        readProperties();
         random = new Random(seed);
         loadStrategies();
         createGamePlayers();
+
+        // Error handling for when nbPlayers > 4
         if (players.size()!=4)
         {
             System.out.printf("Number of players (%d) is greater than the allowed maximum of 4. Exiting..\n",
                     players.size());
             System.exit(10);
         }
-
         assert(players.size()==4);
-        instance = new WhistGame(players.size(), winningScore, nbStartCards, random, enforceRules);
+
         System.out.printf("Original: %s, Legal: %s, Smart: %s",originalStrategy,legalStrategy,smartStrategy);
+    }
+
+    public static WhistGame getInstanceWithUI() throws IOException {
+        loadConfig();
+        instance = new WhistGameWithUI(players.size(), winningScore, nbStartCards, random, enforceRules);
         instance.addPlayers(players);
         return instance;
     }
+
+    public static WhistGame getInstance() throws IOException {
+        loadConfig();
+
+        // Error handling for when nbPlayers > 4
+        if (nbHumanPlayers > 0)
+        {
+            System.out.printf("There should be no human players in a simulation");
+            System.exit(10);
+        }
+        assert(nbHumanPlayers==0);
+
+        instance = new WhistGame(players.size(), winningScore, nbStartCards, random, enforceRules);
+        instance.addPlayers(players);
+        return instance;
+    }
+
 }

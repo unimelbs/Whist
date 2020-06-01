@@ -13,7 +13,7 @@ import java.util.Random;
 public class NPCPlayer extends Player {
 	//The strategy specified for the NPC player
 	private IGameStrategy strategy;
-	private WhistGame.Suit trumps = null;
+	private WhistGame.Suit trump = null;
 	public NPCPlayer(int playerNb) {
 		super(playerNb);
 
@@ -24,8 +24,6 @@ public class NPCPlayer extends Player {
 
 	@Override
 	public Card takeLead() {
-		UI.getInstance().setStatus("players.Player " + playerNb + " thinking...");
-		UI.getInstance().delay(Player.THINKING_TIME);
 		return strategy.getLeadCard(this);
 	}
 
@@ -47,12 +45,17 @@ public class NPCPlayer extends Player {
 		return random;
 	}
 
-	public void setTrumps(WhistGame.Suit trumps){
-		this.trumps = trumps;
+	public void setTrump(WhistGame.Suit trump){
+		this.trump = trump;
 	}
 
 	// TODO do we need to create a copy?
-	public WhistGame.Suit getTrumps(){
-		return trumps;
+	public WhistGame.Suit getTrump(){
+		return trump;
+	}
+
+	public void think(){
+		UI.getInstance().setStatus("players.Player " + playerNb + " thinking...");
+		UI.getInstance().delay(Player.THINKING_TIME);
 	}
 }

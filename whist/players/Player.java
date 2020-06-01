@@ -37,6 +37,7 @@ public abstract class Player {
 	}
 
 	public abstract Card takeLead();
+	public void think(){};
 
 	public abstract Card takeTurn(Hand trick);
 	public GameTracker getGameHistory(){
