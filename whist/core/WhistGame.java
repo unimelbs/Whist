@@ -2,6 +2,7 @@ package core;
 
 import ch.aplu.jcardgame.*;
 import exceptions.BrokeRuleException;
+import players.NPCPlayer;
 import players.Player;
 
 import java.util.*;
@@ -14,12 +15,15 @@ import java.util.concurrent.ThreadLocalRandom;
 @SuppressWarnings("serial")
 public class WhistGame {
     private final String version = "1.0";
-    public int nbPlayers = 4;
+
+    // TODO check this, made static final to be acceessed by npc players
+    public static int nbPlayers = 4;
+    public static final Deck deck = new Deck(WhistGame.Suit.values(), WhistGame.Rank.values(), "cover");
     public int nbStartCards = 13;
     public int winningScore = 11;
     private boolean enforceRules = false;
     private int seed;
-    private final Deck deck = new Deck(WhistGame.Suit.values(), WhistGame.Rank.values(), "cover");
+
     private ArrayList<Player> players = new ArrayList<Player>();
     private UI ui;
     private int[] scores = new int[nbPlayers];
@@ -61,7 +65,8 @@ public class WhistGame {
     private void initRound() {
         //TODO I added false to below dealingOut call to prevent shuffling.
         // Needs revision, shuffling is needed otherwise we always end up with the same game.
-        Hand[] hands = deck.dealingOut(nbPlayers, nbStartCards,false); // Last element of hands is leftover cards; these are ignored
+        // SET SHUFFLE TO TRUE TO TEST PLAYERS
+        Hand[] hands = deck.dealingOut(nbPlayers, nbStartCards,true); // Last element of hands is leftover cards; these are ignored
         for (int i = 0; i < nbPlayers; i++) {
             hands[i].sort(Hand.SortType.SUITPRIORITY, true);
             players.get(i).initRound(hands[i]);
@@ -73,28 +78,38 @@ public class WhistGame {
     private Optional<Integer> playRound() {  // Returns winner, if any
         // Select and display trump suit
         final WhistGame.Suit trumps = randomEnum(WhistGame.Suit.class);
+
+        // TODO DO THIS PROPERLY
+        for (int j=1; j<nbPlayers; j++){
+            NPCPlayer player = (NPCPlayer) players.get(j);
+            player.setTrumps(trumps);
+        }
         ui.displayTrumpSuit(trumps);
         // End trump suit
         Hand trick;
         int winner;
         Card winningCard;
         WhistGame.Suit lead;
+        int leadingPlayer;
         int nextPlayer = random.nextInt(nbPlayers); // randomly select player to lead for this round
         for (int i = 0; i < nbStartCards; i++) {
+            //trick = new Hand(deck);
             trick = new Hand(deck);
             selected = players.get(nextPlayer).takeLead();
+            leadingPlayer = nextPlayer;
             // Lead with selected card
             ui.updateTrick(trick);
             selected.setVerso(false);
             // No restrictions on the card being lead
             lead = (WhistGame.Suit) selected.getSuit();
             selected.transfer(trick, true); // transfer to trick (includes graphic effect)
+
             winner = nextPlayer;
             winningCard = selected;
             // End Lead
             for (int j = 1; j < nbPlayers; j++) {
                 if (++nextPlayer >= nbPlayers) nextPlayer = 0;  // From last back to first
-                selected = players.get(nextPlayer).takeTurn(lead);
+                selected = players.get(nextPlayer).takeTurn(trick);
                 // Follow with selected card
                 ui.updateTrick(trick);
                 selected.setVerso(false);  // In case it is upside down
@@ -132,6 +147,13 @@ public class WhistGame {
             scores[nextPlayer]++;
             ui.updateScore(nextPlayer, scores);
             if (winningScore == scores[nextPlayer]) return Optional.of(nextPlayer);
+
+            // update player's histories
+            // TODO DO THIS PROPERLY
+            for (int j=1; j<nbPlayers; j++){
+                NPCPlayer player = (NPCPlayer) players.get(j);
+                player.updateGameHistory(trick, leadingPlayer);
+            }
         }
 
         ui.clearTrumpSuit();

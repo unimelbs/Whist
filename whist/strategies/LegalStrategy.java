@@ -2,10 +2,13 @@ package strategies;
 
 import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.Hand;
+import core.WhistGame;
 import players.NPCPlayer;
 
-public class LegalStrategy implements IGameStrategy{
+import java.util.Random;
 
+public class LegalStrategy implements IGameStrategy{
+    // return random Card from Hand
     @Override
     public String toString() {
         return "TE10: Legal Strategy v1.";//super.toString();
@@ -13,11 +16,29 @@ public class LegalStrategy implements IGameStrategy{
 
     @Override
     public Card getLeadCard(NPCPlayer player) {
-        return null;
+        int randomCard = player.getRandomGenerator().nextInt(player.getHand().getNumberOfCards());
+        return player.getHand().get(randomCard);
     }
-
     @Override
     public Card getTurnCard(NPCPlayer player, Hand trick) {
-        return null;
+        //WhistGame.Suit lead = (WhistGame.Suit) trick.getFirst().getSuit();
+        WhistGame.Suit lead = (WhistGame.Suit) trick.getFirst().getSuit();
+
+        int numberOfCardsInSuit = player.getHand().getNumberOfCardsWithSuit(lead);
+        int randomCard;
+
+        // if the player has suit, play suit
+        if (numberOfCardsInSuit>0){
+
+            randomCard = player.getRandomGenerator().nextInt(numberOfCardsInSuit);
+            return player.getHand().getCardsWithSuit(lead).get(randomCard);
+
+        // play a random card
+        } else {
+
+            randomCard = player.getRandomGenerator().nextInt(player.getHand().getNumberOfCards());
+            return player.getHand().get(randomCard);
+        }
     }
+
 }

@@ -14,15 +14,14 @@ public class OriginalStrategy implements IGameStrategy {
     }
 
     @Override
-    public Card getLeadCard(NPCPlayer player)
-    {
+    public Card getLeadCard(NPCPlayer player) {
         return randomCard(player.getHand(),player.getRandomGenerator());
     }
 
     @Override
-    public Card getTurnCard(NPCPlayer player, Hand trick)
-    {
-        return randomCard(trick,player.getRandomGenerator());
+    // TODO
+    public Card getTurnCard(NPCPlayer player, Hand trick) {
+        return randomCard(player.getHand(),player.getRandomGenerator());
     }
 
     @Override

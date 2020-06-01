@@ -30,9 +30,8 @@ public class InteractablePlayer extends Player {
 	}
 
 	@Override
-	public Card takeTurn(WhistGame.Suit lead) {
-		return getCardInput();
-	}
+	public Card takeTurn(Hand trick) {return getCardInput(); }
+
 
 	private Card getCardInput(){
 		selected = null;

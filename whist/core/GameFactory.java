@@ -1,5 +1,6 @@
 package core;
 
+import ch.aplu.jcardgame.Deck;
 import players.InteractablePlayer;
 import players.NPCPlayer;
 import players.Player;
@@ -35,7 +36,7 @@ public class GameFactory {
     private static String originalStrategyString;
     private static String legalStrategyString;
     private static String smartStrategyString;
-    public enum Mode {ORIGINAL,LEGAL,SMART};
+    public enum Mode {ORIGINAL,LEGAL,SMART}
     //public static Mode mode;
     private static ArrayList<Player> players;
     private static IGameStrategy originalStrategy;
@@ -49,7 +50,7 @@ public class GameFactory {
         config = new Properties();
         FileReader inStream = null;
         try {
-            inStream = new FileReader("original.properties");
+            inStream = new FileReader("whist.properties");
             config.load(inStream);
             nbSmartNPCPlayers = Integer.parseInt(config.getProperty("nbSmartNPCPlayers"));
             nbNPCPlayers = Integer.parseInt(config.getProperty("nbNPCPlayers"));
