@@ -8,12 +8,14 @@ import players.NPCPlayer;
 public class SmartStrategy implements IGameStrategy {
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Probability Based Smart Strategy v1.";
     }
 
     @Override
-    public Card getLeadCard(NPCPlayer player) {
+    public Card getLeadCard(NPCPlayer player)
+    {
         for (WhistGame.Suit suit : WhistGame.Suit.values()){
             Card card = getTopCardInSuit(player.getHand(),suit);
             if (card!=null && player.getGameHistory().getNumberOfRemainingCardsHigherThan(card)==0){
