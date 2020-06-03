@@ -18,7 +18,6 @@ public class WhistGameWithUI extends WhistGame {
 
     public WhistGameWithUI(int nbPlayers, int winningScore, int nbStartCards, Random random, boolean enforceRules) {
         super(nbPlayers, winningScore, nbStartCards, random, enforceRules);
-        ui = new UI(version, nbPlayers);
     }
 
 

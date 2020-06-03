@@ -37,6 +37,8 @@ public class WhistGame {
     private int leadingPlayer;
     protected int[] scores = new int[nbPlayers];
     private Card selected;
+
+    private UI ui;
     //FIXME Change modified
     public final Random random;
     //public static final Random random = ThreadLocalRandom.current();
@@ -80,6 +82,7 @@ public class WhistGame {
             hands[i].sort(Hand.SortType.SUITPRIORITY, true);
             players.get(i).initRound(hands[i]);
         }
+        ui.initRound(nbPlayers, hands);
     }
 
     protected Optional<Integer> playRound() {  // Returns winner, if any
@@ -129,7 +132,7 @@ public class WhistGame {
         selected.setVerso(false);
         // No restrictions on the card being lead
         lead = (WhistGame.Suit) selected.getSuit();
-        selected.transfer(trick, true); // transfer to trick (includes graphic effect)
+        selected.transfer(trick, false); // transfer to trick (includes graphic effect)
         winner = nextPlayer;
         winningCard = selected;
     }
@@ -156,7 +159,7 @@ public class WhistGame {
                 }
         }
         // End Check
-        selected.transfer(trick, true); // transfer to trick (includes graphic effect)
+        selected.transferNonBlocking(trick, false); // transfer to trick (includes graphic effect)
         System.out.println("winning: suit = " + winningCard.getSuit() + ", rank = " + winningCard.getRankId());
         System.out.println(" played: suit = " + selected.getSuit() + ", rank = " + selected.getRankId());
         if ( // beat current winner with higher card
@@ -193,6 +196,7 @@ public class WhistGame {
         //this.seed = seed;
         this.enforceRules = enforceRules;
         this.random = random; //new Random(seed);
+        ui = new UI(version, nbPlayers);
 
     }
     public void start()
