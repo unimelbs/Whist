@@ -6,7 +6,6 @@ import players.NPCPlayer;
 import players.Player;
 
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 
 /**
@@ -28,7 +27,7 @@ public class WhistGame {
     private UI ui;
     private int[] scores = new int[nbPlayers];
     private Card selected;
-    //FIXME Change modified
+    //FIXME Change modifier
     public final Random random;
     //public static final Random random = ThreadLocalRandom.current();
     public enum Suit {
@@ -78,7 +77,7 @@ public class WhistGame {
     private Optional<Integer> playRound() {  // Returns winner, if any
         // Select and display trump suit
         final WhistGame.Suit trumps = randomEnum(WhistGame.Suit.class);
-
+        publishTrumpChange(trumps);
         // TODO DO THIS PROPERLY
         for (int j=1; j<nbPlayers; j++){
             NPCPlayer player = (NPCPlayer) players.get(j);
@@ -97,17 +96,14 @@ public class WhistGame {
             trick = new Hand(deck);
             selected = players.get(nextPlayer).takeLead();
             leadingPlayer = nextPlayer;
-            System.out.printf("L1: Publish card played: player(%d): Card: %s.\n",
-                    players.get(leadingPlayer).getId(),
-                    selected);
-            publishCardPlayed(selected,players.get(leadingPlayer));
             // Lead with selected card
             ui.updateTrick(trick);
             selected.setVerso(false);
             // No restrictions on the card being lead
             lead = (WhistGame.Suit) selected.getSuit();
             selected.transfer(trick, true); // transfer to trick (includes graphic effect)
-
+            //Publishing CardPlayed event.
+            publishCardPlayed(selected,players.get(leadingPlayer));
             winner = nextPlayer;
             winningCard = selected;
             // End Lead
@@ -116,10 +112,12 @@ public class WhistGame {
                 selected = players.get(nextPlayer).takeTurn(trick);
                 // Follow with selected card
                 ui.updateTrick(trick);
+                //TODO TE: Remove
+                /*
                 System.out.printf("L2: Publish card played: player(%d): Card: %s.\n",
                         players.get(nextPlayer).getId(),
                         selected);
-                publishCardPlayed(selected,players.get(nextPlayer));
+                 */
                 selected.setVerso(false);  // In case it is upside down
                 // Check: Following card must follow suit if possible
                 if (selected.getSuit() != lead && players.get(nextPlayer).getHand().getNumberOfCardsWithSuit(lead) > 0) {
@@ -137,6 +135,7 @@ public class WhistGame {
                 }
                 // End Check
                 selected.transfer(trick, true); // transfer to trick (includes graphic effect)
+                publishCardPlayed(selected,players.get(nextPlayer));
                 System.out.println("winning: suit = " + winningCard.getSuit() + ", rank = " + winningCard.getRankId());
                 System.out.println(" played: suit = " + selected.getSuit() + ", rank = " + selected.getRankId());
                 if ( // beat current winner with higher card
@@ -149,14 +148,17 @@ public class WhistGame {
                 }
                 // End Follow
             }
-
+            //Publish trickWon event
+            publishTrickWon(players.get(winner));
             ui.endTrick(trick, winner);
             nextPlayer = winner;
             scores[nextPlayer]++;
             ui.updateScore(nextPlayer, scores);
             if (winningScore == scores[nextPlayer]) return Optional.of(nextPlayer);
 
+
             // update player's histories
+            //FIXME redundant; I've added publish/subscriber update of cards played.
             // TODO DO THIS PROPERLY
             for (int j=1; j<nbPlayers; j++){
                 NPCPlayer player = (NPCPlayer) players.get(j);
@@ -175,6 +177,7 @@ public class WhistGame {
     public void addPlayers(ArrayList<Player> players)
     {
         this.players = players;
+        //Subscribing new players to WhistGame events.
         for (Player p: players)
         {
             this.addPlayListener(p);
@@ -194,6 +197,10 @@ public class WhistGame {
         ui = new UI(version, nbPlayers);
 
     }
+
+    /**
+     * Starts the game.
+     */
     public void start()
     {
         // initialize players and scores
@@ -226,11 +233,40 @@ public class WhistGame {
         }
     }
 
+    /**
+     * Updates subscribers on the card played by a player.
+     * @param card
+     * @param player
+     */
     private void publishCardPlayed(Card card, Player player)
     {
         for (IPlayListener listener: playListeners)
         {
             listener.onCardPlayed(card,player);
+        }
+    }
+
+    /**
+     * Updates subscribers on Trump change.
+     * @param trump
+     */
+    private void publishTrumpChange(Suit trump)
+    {
+        for (IPlayListener listener: playListeners)
+        {
+            listener.onTrumpChange(trump);
+        }
+    }
+
+    /**
+     * Updates subscribers on which Player won the trick.
+     * @param player
+     */
+    private void publishTrickWon(Player player)
+    {
+        for (IPlayListener listener: playListeners)
+        {
+            listener.onTrickWon(player);
         }
     }
 

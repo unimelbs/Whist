@@ -7,12 +7,16 @@ import players.NPCPlayer;
 
 import java.util.Random;
 
+/**
+ * Represents a legal playing logic to be used by NPC Players
+ */
 public class LegalStrategy implements IGameStrategy{
     // return random Card from Hand
     @Override
     public String toString() {
-        return "TE10: Legal Strategy v1.";//super.toString();
+        return "Legal Strategy v1.";//super.toString();
     }
+
 
     @Override
     public Card getLeadCard(NPCPlayer player) {

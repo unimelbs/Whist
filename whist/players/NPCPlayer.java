@@ -53,14 +53,8 @@ public class NPCPlayer extends Player {
 
 	// TODO do we need to create a copy?
 	public WhistGame.Suit getTrumps(){
-		return trumps;
+		//TODO TE: Using current trump stored in GameTracker.
+		return this.getGameHistory().getCurrentTrump();//trumps;
 	}
 
-	/*
-	@Override
-	public void onCardPlayed(Card card, Player player) {
-		super.onCardPlayed(card, player);
-	}
-
-	 */
 }

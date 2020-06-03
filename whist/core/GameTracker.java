@@ -11,13 +11,21 @@ import java.util.Hashtable;
 import java.util.List;
 
 public class GameTracker {
+    private Deck deck;
+    private WhistGame.Suit currentTrump;
     private Hand playedCards;
+    private HashMap<Player,Hand> plyHistory;
     private HashMap<Player, ArrayList<Card>> playersHistory;
     private ArrayList<PlayerHistory> playerHistories;
+    private int[] scores;
 
     public GameTracker(Deck deck, int nbPlayers){
+        //Initialises GameTracker instance variables
+        this.deck = deck;
         this.playedCards = new Hand(deck);
+        this.plyHistory = new HashMap<Player,Hand>();
         this.playerHistories = new ArrayList<PlayerHistory>();
+        this.scores = new int[nbPlayers];
         //TODO TE: I added this one to use the observer pattern
         this.playersHistory = new HashMap<Player,ArrayList<Card>>();
         for (int i = 0; i<nbPlayers; i++){
@@ -79,8 +87,32 @@ public class GameTracker {
     public boolean isShortedSuitedIn(int player, WhistGame.Suit suit){
         return playerHistories.get(player).shortSuitedIn(suit);
     }
+
+    /**
+     * Updates current trump based on the event published by the game.
+     * @param trump
+     */
+    public void updateTrump(WhistGame.Suit trump){this.currentTrump = trump;}
+
+
+    /**
+     * Updates history of played cards based on the event published by the game.
+     * @param card
+     * @param player
+     */
     public void addPlayedCard(Card card, Player player)
     {
+        if(plyHistory.get(player)==null)
+        {
+            Hand history = new Hand(this.deck);
+            history.insert(card,false);
+            plyHistory.put(player,history);
+
+        }
+        else
+        {
+            plyHistory.get(player).insert(card,false);
+        }
         if(playersHistory.get(player)==null)
         {
             ArrayList<Card> playerCards = new ArrayList<Card>();
@@ -93,28 +125,32 @@ public class GameTracker {
         }
     }
 
-    //TODO TE: Remove, added for testing
-    public String getGameTrackerState()
+    /**
+     * Updates Players scores based on event published by the game.
+     * @param player
+     */
+    public void updateScores(Player player){this.scores[player.getId()]++;}
+
+    /**
+     * Gets the ID of the current Winner (player with highest score).
+     * @return
+     */
+    public int getCurrentWinnerId()
     {
-        String state = "players history has "+this.playersHistory.size()+" entries.";
-        return state;
-    }
-    public void printTrackerState()
-    {
-        String state="";
-        for (Player p: playersHistory.keySet())
+        int highestScore = 0;
+        int winningId=0;
+        for (int i=0;i<scores.length;i++)
         {
-            state+=p.getId()+ ": ";
-            int i=0;
-            for (Card c: playersHistory.get(p))
+            if(scores[i]>highestScore)
             {
-                state+=i+":"+c.toString()+" ";
-                i++;
+                highestScore=scores[i];
+                winningId=i;
             }
-            state+="\n";
         }
-        state+="\n";
-        System.out.println(state);
+        return winningId;
     }
+
+    //Getters
+    public WhistGame.Suit getCurrentTrump(){return this.currentTrump;}
 
 }

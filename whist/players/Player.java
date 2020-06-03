@@ -1,16 +1,11 @@
 package players;// LegalPlayer.java
 
 import ch.aplu.jcardgame.*;
-import ch.aplu.jgamegrid.*;
 import core.GameTracker;
 import core.IPlayListener;
 import core.WhistGame;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.image.BufferedImage;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 @SuppressWarnings("serial")
 public abstract class Player implements IPlayListener {
@@ -44,12 +39,38 @@ public abstract class Player implements IPlayListener {
 	{
 		return gameHistory;
 	}
+
+	/**
+	 * Updates Player with a played card event published by the game.
+	 * @param card
+	 * @param player
+	 */
 	public void onCardPlayed(Card card, Player player)
 	{
 		this.gameHistory.addPlayedCard(card,player);
+		//TODO TE: Remove
+		/*
 		System.out.printf("onCardPlayed.player[%s].Gamehistory state:\n",
 				this.playerNb);
 		this.gameHistory.printTrackerState();
+
+		 */
+	}
+
+	/**
+	 * Updates Player with a new Trump event published by the game.
+	 * @param trump
+	 */
+	public void onTrumpChange(WhistGame.Suit trump){this.gameHistory.updateTrump(trump);}
+
+	/**
+	 * Updates each Player of the player who won the trick. This information is stored
+	 * in Player's GameTracker and is used by Smart Players.
+	 * @param player
+	 */
+	public void onTrickWon(Player player)
+	{
+		this.gameHistory.updateScores(player);
 	}
 	public void updateGameHistory(Hand trick, int startingPlayer)
 	{

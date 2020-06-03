@@ -26,6 +26,6 @@ public class OriginalStrategy implements IGameStrategy {
 
     @Override
     public String toString() {
-        return "TE10: Original Based Strategy smart v1.";//super.toString();
+        return "Original settings Strategy v1.";//super.toString();
     }
 }
