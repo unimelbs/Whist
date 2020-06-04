@@ -10,12 +10,14 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
+/**
+ * Helps smart player store information on other players, and contains helper functions for retrieving information
+ */
 public class GameTracker {
     private Deck deck;
     private WhistGame.Suit currentTrump;
     private int nbPlayers;
     private ArrayList<PlayerHistory> playerHistories;
-
 
     public GameTracker(Deck deck, int nbPlayers){
         //Initialises GameTracker instance variables
@@ -26,7 +28,6 @@ public class GameTracker {
             playerHistories.add(new PlayerHistory(deck, i));
         }
     }
-
 
     public void addToHistory(Hand trick, int startingPlayer, int winningPlayer){
         WhistGame.Suit lead = (WhistGame.Suit) trick.getFirst().getSuit();

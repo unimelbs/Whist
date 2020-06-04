@@ -37,13 +37,15 @@ public class UI extends CardGame {
     final String trumpImage[] = {"bigspade.gif","bigheart.gif","bigdiamond.gif","bigclub.gif"};
     private Actor trumpsActor;
     private static UI ui;
+    private boolean hideCards;
 
-    protected UI(String version, int nbPlayers){
+    protected UI(String version, int nbPlayers, boolean hideCards){
         super(700, 700, 30);
         if (ui != null){
-            System.out.println("Singleton core.UI screwed up");
+            System.out.println("Singleton core.UI error");
         }
         ui = this;
+        this.hideCards = hideCards;
         setTitle("Whist (V" + version + ") Constructed for UofM SWEN30006 with JGameGrid (www.aplu.ch)");
         setStatus("Initializing...");
         // Initialize score
@@ -55,7 +57,7 @@ public class UI extends CardGame {
 
     public static UI getInstance(){
         if (ui == null){
-            System.out.println("Singleton core.UI screwed up");
+            System.out.println("Singleton core.UI error");
         }
         return ui;
     }
@@ -72,9 +74,12 @@ public class UI extends CardGame {
             hands[i].setTargetArea(new TargetArea(trickLocation));
             hands[i].draw();
         }
-//	    for (int i = 1; i < nbPlayers; i++)  // This code can be used to visually hide the cards in a hand (make them face down)
-//	      hands[i].setVerso(true);
-        // End graphics
+        // Hide cards in hands
+        if (hideCards){
+            for (int i = 1; i < nbPlayers; i++){
+                hands[i].setVerso(true);
+            }
+        }
     }
 
     protected void updateScore(int player, int[] scores) {

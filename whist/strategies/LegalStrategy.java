@@ -14,18 +14,17 @@ public class LegalStrategy implements IGameStrategy{
     // return random Card from Hand
     @Override
     public String toString() {
-        return "Legal Strategy v1.";//super.toString();
+        return "Legal Strategy v1.";
     }
-
 
     @Override
     public Card getLeadCard(NPCPlayer player) {
         int randomCard = player.getRandomGenerator().nextInt(player.getHand().getNumberOfCards());
         return player.getHand().get(randomCard);
     }
+
     @Override
     public Card getTurnCard(NPCPlayer player, Hand trick) {
-        //WhistGame.Suit lead = (WhistGame.Suit) trick.getFirst().getSuit();
         WhistGame.Suit lead = (WhistGame.Suit) trick.getFirst().getSuit();
 
         int numberOfCardsInSuit = player.getHand().getNumberOfCardsWithSuit(lead);
@@ -39,7 +38,6 @@ public class LegalStrategy implements IGameStrategy{
 
         // play a random card
         } else {
-
             randomCard = player.getRandomGenerator().nextInt(player.getHand().getNumberOfCards());
             return player.getHand().get(randomCard);
         }

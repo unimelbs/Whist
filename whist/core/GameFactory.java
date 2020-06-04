@@ -1,6 +1,5 @@
 package core;
 
-import ch.aplu.jcardgame.Deck;
 import players.InteractablePlayer;
 import players.NPCPlayer;
 import players.Player;
@@ -16,29 +15,27 @@ import java.util.Random;
 
 /**
  * Handles the complex creation of core.WhistGame based on the configuration
- * available in original.properties file
+ * available in whist.properties file
  */
 public class GameFactory {
-    public static WhistGame instance;
-    private static final int MAX_NUMBER_OF_PLAYERS=4;
-    private static StrategyFactory strategyFactory;
-    private static Properties config;
+    private static final int MAX_NUMBER_OF_PLAYERS = 4;
+    // properties
     private static int seed;
-    //original.properties
     private static int nbHumanPlayers;
     private static boolean enforceRules;
-    //legal.properties
-    private static int nbNPCPlayers;
+    private static int nbRandomNPCPlayers;
     private static int nbLegalNPCPlayers;
     private static int nbStartCards;
     private static int winningScore;
-    //smart.properties
     private static int nbSmartNPCPlayers;
+    private static boolean hideCards;
+    // variables
+    public static WhistGame instance;
+    private static StrategyFactory strategyFactory;
+    private static Properties config;
     private static String originalStrategyString;
     private static String legalStrategyString;
     private static String smartStrategyString;
-    public enum Mode {ORIGINAL,LEGAL,SMART}
-    //public static Mode mode;
     private static ArrayList<Player> players;
     private static IGameStrategy originalStrategy;
     private static IGameStrategy legalStrategy;
@@ -54,7 +51,7 @@ public class GameFactory {
             inStream = new FileReader("whist.properties");
             config.load(inStream);
             nbSmartNPCPlayers = Integer.parseInt(config.getProperty("nbSmartNPCPlayers"));
-            nbNPCPlayers = Integer.parseInt(config.getProperty("nbNPCPlayers"));
+            nbRandomNPCPlayers = Integer.parseInt(config.getProperty("nbRandomNPCPlayers"));
             nbLegalNPCPlayers = Integer.parseInt(config.getProperty("nbLegalNPCPlayers"));
             seed = Integer.parseInt(config.getProperty("seed"));
             nbHumanPlayers = Integer.parseInt(config.getProperty("nbHumanPlayers"));
@@ -64,6 +61,7 @@ public class GameFactory {
             originalStrategyString = config.getProperty("originalStrategy");
             legalStrategyString = config.getProperty("legalStrategy");
             smartStrategyString = config.getProperty("smartStrategy");
+            hideCards = Boolean.parseBoolean(config.getProperty("hideCards"));
             System.out.println("Configurations successfully loaded.");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -96,7 +94,7 @@ public class GameFactory {
             playerId++;
         }
         //Creating random NPC players
-        for (int i=0;i<nbNPCPlayers;i++) {
+        for (int i = 0; i< nbRandomNPCPlayers; i++) {
             NPCPlayer p = new NPCPlayer(playerId, random);
             p.setStrategy(originalStrategy);
             players.add(p);
@@ -129,7 +127,7 @@ public class GameFactory {
                     players.size());
             System.exit(10);
         }
-        instance = new WhistGame(players.size(), winningScore, nbStartCards, random, enforceRules);
+        instance = new WhistGame(players.size(), winningScore, nbStartCards, random, enforceRules, hideCards);
         instance.addPlayers(players);
         return instance;
     }

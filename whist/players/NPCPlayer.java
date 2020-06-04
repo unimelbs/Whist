@@ -24,14 +24,19 @@ public class NPCPlayer extends Player {
 
 	@Override
 	public Card takeLead() {
-		UI.getInstance().setStatus("players.Player " + playerNb + " thinking...");
-		UI.getInstance().delay(Player.THINKING_TIME);
+		think();
 		return strategy.getLeadCard(this);
 	}
 
 	@Override
 	public Card takeTurn(Hand trick) {
+		think();
 		return strategy.getTurnCard(this,trick);
+	}
+
+	private void think(){
+		UI.getInstance().setStatus("Player " + playerNb + " thinking...");
+		UI.getInstance().delay(Player.THINKING_TIME);
 	}
 
 	public Random getRandomGenerator()
@@ -44,7 +49,7 @@ public class NPCPlayer extends Player {
 	}
 
 	public WhistGame.Suit getTrumps(){
-		return this.getGameHistory().getCurrentTrump();//trumps;
+		return this.getGameHistory().getCurrentTrump();
 	}
 	public void setStrategy(IGameStrategy strategy){
 		this.strategy = strategy;

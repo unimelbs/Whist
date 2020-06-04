@@ -14,22 +14,17 @@ import java.util.*;
 @SuppressWarnings("serial")
 public class WhistGame {
     private final String version = "1.0";
-
-    // TODO check this, made static final to be acceessed by npc players
     public static int nbPlayers = 4;
     public static final Deck deck = new Deck(WhistGame.Suit.values(), WhistGame.Rank.values(), "cover");
     public int nbStartCards = 13;
-    public int winningScore = 11;
+    public int winningScore = 10;
     private boolean enforceRules = false;
-    private int seed;
     private ArrayList<IPlayListener> playListeners;
     private ArrayList<Player> players = new ArrayList<Player>();
     private UI ui;
     private int[] scores = new int[nbPlayers];
     private Card selected;
-    //FIXME Change modifier
-    public final Random random;
-    //public static final Random random = ThreadLocalRandom.current();
+    private final Random random;
     public enum Suit {
         SPADES, HEARTS, DIAMONDS, CLUBS
     }
@@ -62,16 +57,33 @@ public class WhistGame {
     }
 
     private void initRound() {
-        //TODO I added false to below dealingOut call to prevent shuffling.
-        // Needs revision, shuffling is needed otherwise we always end up with the same game.
-        // SET SHUFFLE TO TRUE TO TEST PLAYERS
-        Hand[] hands = deck.dealingOut(nbPlayers, nbStartCards,true); // Last element of hands is leftover cards; these are ignored
+        Hand[] hands = dealCards();
+        hands.toString();
         for (int i = 0; i < nbPlayers; i++) {
             hands[i].sort(Hand.SortType.SUITPRIORITY, true);
             players.get(i).initRound(hands[i]);
         }
         // graphics
         ui.initRound(nbPlayers, hands);
+    }
+
+
+    // deal out cards using random from seed
+    private Hand[] dealCards(){
+        // Convert to hand for ease of access
+        Hand deckAsHand = deck.toHand(false);
+        Hand[] hands = new Hand[nbPlayers];
+        for (int i = 0; i<nbStartCards; i++){
+            for (int j = 0; j<nbPlayers; j++){
+                int randomInt = random.nextInt(deckAsHand.getNumberOfCards());
+                if (hands[j] == null){
+                    hands[j] = new Hand(deck);
+                }
+                hands[j].insert(deckAsHand.get(randomInt), false);
+                deckAsHand.remove(randomInt, false);
+            }
+        }
+        return hands;
     }
 
     private Optional<Integer> playRound() {  // Returns winner, if any
@@ -87,7 +99,6 @@ public class WhistGame {
         int leadingPlayer;
         int nextPlayer = random.nextInt(nbPlayers); // randomly select player to lead for this round
         for (int i = 0; i < nbStartCards; i++) {
-            //trick = new Hand(deck);
             trick = new Hand(deck);
             selected = players.get(nextPlayer).takeLead();
             leadingPlayer = nextPlayer;
@@ -98,8 +109,6 @@ public class WhistGame {
             lead = (WhistGame.Suit) selected.getSuit();
             selected.transfer(trick, true); // transfer to trick (includes graphic effect)
             //Publishing CardPlayed event.
-            // TODO REDUNDANT
-            // publishCardPlayed(selected,players.get(leadingPlayer));
             winner = nextPlayer;
             winningCard = selected;
             // End Lead
@@ -108,12 +117,6 @@ public class WhistGame {
                 selected = players.get(nextPlayer).takeTurn(trick);
                 // Follow with selected card
                 ui.updateTrick(trick);
-                //TODO TE: Remove
-                /*
-                System.out.printf("L2: Publish card played: player(%d): Card: %s.\n",
-                        players.get(nextPlayer).getId(),
-                        selected);
-                 */
                 selected.setVerso(false);  // In case it is upside down
                 // Check: Following card must follow suit if possible
                 if (selected.getSuit() != lead && players.get(nextPlayer).getHand().getNumberOfCardsWithSuit(lead) > 0) {
@@ -131,8 +134,6 @@ public class WhistGame {
                 }
                 // End Check
                 selected.transfer(trick, true); // transfer to trick (includes graphic effect)
-                // TODO REDUNDANT
-                // publishCardPlayed(selected,players.get(nextPlayer));
                 System.out.println("winning: suit = " + winningCard.getSuit() + ", rank = " + winningCard.getRankId());
                 System.out.println(" played: suit = " + selected.getSuit() + ", rank = " + selected.getRankId());
                 if ( // beat current winner with higher card
@@ -173,17 +174,15 @@ public class WhistGame {
         }
     }
 
-    //public WhistGame(int nbPlayers, int winningScore, int nbStartCards, int seed, boolean enforceRules)
-    public WhistGame(int nbPlayers, int winningScore, int nbStartCards, Random random, boolean enforceRules)
+    public WhistGame(int nbPlayers, int winningScore, int nbStartCards, Random random, boolean enforceRules, boolean hideCards)
     {
         this.playListeners = new ArrayList<IPlayListener>();
         this.nbPlayers = nbPlayers;
         this.winningScore = winningScore;
         this.nbStartCards = nbStartCards;
-        //this.seed = seed;
         this.enforceRules = enforceRules;
-        this.random = random; //new Random(seed);
-        ui = new UI(version, nbPlayers);
+        this.random = random;
+        ui = new UI(version, nbPlayers, hideCards);
 
     }
 
@@ -221,20 +220,6 @@ public class WhistGame {
             playListeners.add(pl);
         }
     }
-
-    /**
-     * TODO REMOVE
-     * Updates subscribers on the card played by a player.
-     * @param card
-     * @param player
-
-    private void publishCardPlayed(Card card, Player player)
-    {
-        for (IPlayListener listener: playListeners)
-        {
-            listener.onCardPlayed(card,player);
-        }
-    }**/
 
     /**
      * Updates subscribers on Trump change.
