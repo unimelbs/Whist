@@ -7,7 +7,7 @@ import ch.aplu.jcardgame.Hand;
 import java.util.ArrayList;
 
 public class PlayerHistory {
-    private ArrayList<WhistGame.Suit> missedSuits;
+    private ArrayList<WhistGame.Suit> missedSuits; // the suits a player is short suited in
     private Hand playedCards;
     private int score;
     private int playerNb;
@@ -18,7 +18,6 @@ public class PlayerHistory {
         score = 0;
         this.playerNb = playerNb;
     }
-
     public void addMissedSuit(WhistGame.Suit suit){
         if (! missedSuits.contains(suit)){
             missedSuits.add(suit);
