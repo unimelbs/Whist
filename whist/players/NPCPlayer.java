@@ -31,15 +31,7 @@ public class NPCPlayer extends Player {
 
 	@Override
 	public Card takeTurn(Hand trick) {
-		// TODO remove
 		return strategy.getTurnCard(this,trick);
-	}
-
-	//TODO to review, not so sure if we need this
-
-	public void setStrategy(IGameStrategy strategy)
-	{
-		this.strategy = strategy;
 	}
 
 	public Random getRandomGenerator()
@@ -51,9 +43,7 @@ public class NPCPlayer extends Player {
 		this.trumps = trumps;
 	}
 
-	// TODO do we need to create a copy?
 	public WhistGame.Suit getTrumps(){
-		//TODO TE: Using current trump stored in GameTracker.
 		return this.getGameHistory().getCurrentTrump();//trumps;
 	}
 

@@ -19,7 +19,7 @@ public class OriginalStrategy implements IGameStrategy {
     }
 
     @Override
-    // TODO
+    // TODO check if properly random
     public Card getTurnCard(NPCPlayer player, Hand trick) {
         return randomCard(player.getHand(),player.getRandomGenerator());
     }

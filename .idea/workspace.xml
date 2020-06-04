@@ -27,14 +27,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5972c81c-ea24-44a9-b0c6-4142f52f407e" name="Default Changelist" comment="Implemented player strategies">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whist/core/PlayerHistory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Whist.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Whist.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/core/GameFactory$Mode.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/GameFactory$Mode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/core/GameFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/GameFactory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/core/GameTracker.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/GameTracker.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/core/IPlayListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/IPlayListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/core/PlayerHistory.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/PlayerHistory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/core/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/UI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/core/WhistGame$Rank.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/WhistGame$Rank.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/core/WhistGame$Suit.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/WhistGame$Suit.class" afterDir="false" />
@@ -47,20 +46,16 @@
       <change beforePath="$PROJECT_DIR$/bin/strategies/IGameStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/IGameStrategy.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/strategies/LegalStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/LegalStrategy.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/strategies/OriginalStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/OriginalStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/ProbabilityBasedStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/strategies/SmartStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/SmartStrategy.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/strategies/StrategyFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/StrategyFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/legal.properties" beforeDir="false" afterPath="$PROJECT_DIR$/legal.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smart.properties" beforeDir="false" afterPath="$PROJECT_DIR$/smart.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whist.properties" beforeDir="false" afterPath="$PROJECT_DIR$/whist.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/core/GameFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/GameFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whist/core/GameTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/GameTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whist/core/IPlayListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/IPlayListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whist/core/PlayerHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/PlayerHistory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whist/core/WhistGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/WhistGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/players/InteractablePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/players/InteractablePlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/players/NPCPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/players/NPCPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whist/players/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/players/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/strategies/LegalStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/strategies/LegalStrategy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whist/strategies/OriginalStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/strategies/OriginalStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/strategies/ProbabilityBasedStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/strategies/SmartStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whist/strategies/SmartStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/strategies/SmartStrategy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,6 +154,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implemented player strategies" />
@@ -186,26 +182,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1590588095650" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1591003891437">
+    <state width="1877" height="229" key="GridCell.Tab.0.bottom" timestamp="1591255022202">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591003891437" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1591003891437">
+    <state width="1877" height="229" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591255022202" />
+    <state width="1877" height="229" key="GridCell.Tab.0.center" timestamp="1591255022202">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591003891437" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1591003891437">
+    <state width="1877" height="229" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591255022202" />
+    <state width="1877" height="229" key="GridCell.Tab.0.left" timestamp="1591255022202">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591003891437" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1591003891437">
+    <state width="1877" height="229" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591255022202" />
+    <state width="1877" height="229" key="GridCell.Tab.0.right" timestamp="1591255022202">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591003891437" />
+    <state width="1877" height="229" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591255022202" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1590592432010">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -231,10 +227,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591000775564" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1590995735109">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1591249260687">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1590995735109" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591249260687" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

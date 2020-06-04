@@ -18,8 +18,22 @@ public class SmartStrategy implements IGameStrategy {
     {
         for (WhistGame.Suit suit : WhistGame.Suit.values()){
             Card card = getTopCardInSuit(player.getHand(),suit);
+            boolean canTrump=false;
             if (card!=null && player.getGameHistory().getNumberOfRemainingCardsHigherThan(card)==0){
-                return card;
+                int otherPlayer = player.getId()+1;
+                for (int i=0; i<WhistGame.nbPlayers-1; i++){
+                    if (otherPlayer==WhistGame.nbPlayers){otherPlayer=0;} // reset the player
+
+                    if (player.getGameHistory().isShortedSuitedIn(otherPlayer, (WhistGame.Suit) card.getSuit())
+                        && !player.getGameHistory().isShortedSuitedIn(otherPlayer, player.getGameHistory().getCurrentTrump())) {
+                        canTrump = true;
+                        break;
+                    }
+                    otherPlayer++;
+                }
+                if (!canTrump) {
+                    return card;
+                }
             }
         }
         return discard(player.getHand(),player.getTrumps());

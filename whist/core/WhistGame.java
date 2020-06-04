@@ -77,12 +77,7 @@ public class WhistGame {
     private Optional<Integer> playRound() {  // Returns winner, if any
         // Select and display trump suit
         final WhistGame.Suit trumps = randomEnum(WhistGame.Suit.class);
-        publishTrumpChange(trumps);
-        // TODO DO THIS PROPERLY
-        for (int j=1; j<nbPlayers; j++){
-            NPCPlayer player = (NPCPlayer) players.get(j);
-            player.setTrumps(trumps);
-        }
+        publishNewRound(trumps);
         ui.displayTrumpSuit(trumps);
         // End trump suit
         Hand trick;
@@ -103,7 +98,8 @@ public class WhistGame {
             lead = (WhistGame.Suit) selected.getSuit();
             selected.transfer(trick, true); // transfer to trick (includes graphic effect)
             //Publishing CardPlayed event.
-            publishCardPlayed(selected,players.get(leadingPlayer));
+            // TODO REDUNDANT
+            // publishCardPlayed(selected,players.get(leadingPlayer));
             winner = nextPlayer;
             winningCard = selected;
             // End Lead
@@ -135,7 +131,8 @@ public class WhistGame {
                 }
                 // End Check
                 selected.transfer(trick, true); // transfer to trick (includes graphic effect)
-                publishCardPlayed(selected,players.get(nextPlayer));
+                // TODO REDUNDANT
+                // publishCardPlayed(selected,players.get(nextPlayer));
                 System.out.println("winning: suit = " + winningCard.getSuit() + ", rank = " + winningCard.getRankId());
                 System.out.println(" played: suit = " + selected.getSuit() + ", rank = " + selected.getRankId());
                 if ( // beat current winner with higher card
@@ -149,21 +146,13 @@ public class WhistGame {
                 // End Follow
             }
             //Publish trickWon event
-            publishTrickWon(players.get(winner));
+            publishEndTrick(leadingPlayer, winner, trick);
             ui.endTrick(trick, winner);
             nextPlayer = winner;
             scores[nextPlayer]++;
             ui.updateScore(nextPlayer, scores);
             if (winningScore == scores[nextPlayer]) return Optional.of(nextPlayer);
 
-
-            // update player's histories
-            //FIXME redundant; I've added publish/subscriber update of cards played.
-            // TODO DO THIS PROPERLY
-            for (int j=1; j<nbPlayers; j++){
-                NPCPlayer player = (NPCPlayer) players.get(j);
-                player.updateGameHistory(trick, leadingPlayer);
-            }
         }
 
         ui.clearTrumpSuit();
@@ -234,39 +223,41 @@ public class WhistGame {
     }
 
     /**
+     * TODO REMOVE
      * Updates subscribers on the card played by a player.
      * @param card
      * @param player
-     */
+
     private void publishCardPlayed(Card card, Player player)
     {
         for (IPlayListener listener: playListeners)
         {
             listener.onCardPlayed(card,player);
         }
-    }
+    }**/
 
     /**
      * Updates subscribers on Trump change.
-     * @param trump
+     * @param newTrump
      */
-    private void publishTrumpChange(Suit trump)
+    private void publishNewRound(Suit newTrump)
     {
         for (IPlayListener listener: playListeners)
         {
-            listener.onTrumpChange(trump);
+            listener.onNewRound(newTrump);
         }
     }
 
     /**
      * Updates subscribers on which Player won the trick.
-     * @param player
+     * @param startingPlayer
+     * @param trick
      */
-    private void publishTrickWon(Player player)
+    private void publishEndTrick(int startingPlayer, int winningPlayer, Hand trick)
     {
         for (IPlayListener listener: playListeners)
         {
-            listener.onTrickWon(player);
+            listener.onEndTrick(startingPlayer, winningPlayer, trick);
         }
     }
 

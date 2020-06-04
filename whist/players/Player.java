@@ -40,42 +40,16 @@ public abstract class Player implements IPlayListener {
 		return gameHistory;
 	}
 
-	/**
-	 * Updates Player with a played card event published by the game.
-	 * @param card
-	 * @param player
-	 */
-	public void onCardPlayed(Card card, Player player)
+	@Override
+	public void onEndTrick(int startingPlayer, int winningPlayer, Hand trick)
 	{
-		this.gameHistory.addPlayedCard(card,player);
-		//TODO TE: Remove
-		/*
-		System.out.printf("onCardPlayed.player[%s].Gamehistory state:\n",
-				this.playerNb);
-		this.gameHistory.printTrackerState();
-
-		 */
+		this.gameHistory.addToHistory(trick, startingPlayer, winningPlayer);
+	}
+	@Override
+	public void onNewRound(WhistGame.Suit trumps){
+		this.gameHistory.newRound(trumps);
 	}
 
-	/**
-	 * Updates Player with a new Trump event published by the game.
-	 * @param trump
-	 */
-	public void onTrumpChange(WhistGame.Suit trump){this.gameHistory.updateTrump(trump);}
-
-	/**
-	 * Updates each Player of the player who won the trick. This information is stored
-	 * in Player's GameTracker and is used by Smart Players.
-	 * @param player
-	 */
-	public void onTrickWon(Player player)
-	{
-		this.gameHistory.updateScores(player);
-	}
-	public void updateGameHistory(Hand trick, int startingPlayer)
-	{
-		this.gameHistory.addToHistory(trick, startingPlayer);
-	}
 	public int getId(){return this.playerNb;}
 
 }
