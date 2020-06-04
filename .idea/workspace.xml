@@ -26,37 +26,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5972c81c-ea24-44a9-b0c6-4142f52f407e" name="Default Changelist" comment="Implemented player strategies">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Whist.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Whist.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/GameFactory$Mode.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/GameFactory$Mode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/GameFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/GameFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/GameTracker.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/GameTracker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/IPlayListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/IPlayListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/PlayerHistory.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/PlayerHistory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/UI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/WhistGame$Rank.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/WhistGame$Rank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/WhistGame$Suit.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/WhistGame$Suit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/WhistGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/WhistGame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/exceptions/BrokeRuleException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/exceptions/BrokeRuleException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/players/InteractablePlayer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/players/InteractablePlayer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/players/InteractablePlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/players/InteractablePlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/players/NPCPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/players/NPCPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/players/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/players/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/IGameStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/IGameStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/LegalStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/LegalStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/OriginalStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/OriginalStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/SmartStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/SmartStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/StrategyFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/StrategyFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist.properties" beforeDir="false" afterPath="$PROJECT_DIR$/whist.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/core/GameTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/GameTracker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/core/IPlayListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/IPlayListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/core/PlayerHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/PlayerHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/core/WhistGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/WhistGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/players/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/players/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/strategies/OriginalStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/strategies/OriginalStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/strategies/SmartStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/strategies/SmartStrategy.java" afterDir="false" />
-    </list>
+    <list default="true" id="5972c81c-ea24-44a9-b0c6-4142f52f407e" name="Default Changelist" comment="Finishing player history and game tracker" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -127,6 +97,14 @@
       <workItem from="1590398115378" duration="1845000" />
       <workItem from="1590551936808" duration="7921000" />
     </task>
+    <task id="LOCAL-00001" summary="Finishing player history and game tracker">
+      <created>1591255288390</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1591255288390</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,7 +136,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implemented player strategies" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented player strategies" />
+    <MESSAGE value="Mish last update" />
+    <MESSAGE value="Finishing player history and game tracker" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finishing player history and game tracker" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590385166578">
