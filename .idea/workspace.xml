@@ -19,33 +19,18 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5972c81c-ea24-44a9-b0c6-4142f52f407e" name="Default Changelist" comment="Finishing player history and game tracker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whist/players/NPCPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/players/NPCPlayer.java" afterDir="false" />
     </list>
     <list id="6ef7d2f8-bd5c-4389-a7f4-c0d09ce6bb08" name="Added trump change event, changed getTrump method in NPCPlayer" comment="Added trump change event, changed getTrump method in NPCPlayer">
       <changelist_data name="Tarek Elbeik" email="elbeikt@student.unimelb.edu.au" date="1591189358000" />
-      <change beforePath="$PROJECT_DIR$/bin/core/GameTracker.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/GameTracker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/IPlayListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/IPlayListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/WhistGame$Rank.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/WhistGame$Rank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/WhistGame$Suit.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/WhistGame$Suit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/core/WhistGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/core/WhistGame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/players/NPCPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/players/NPCPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/players/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/players/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/LegalStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/LegalStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/OriginalStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/OriginalStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/strategies/SmartStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/strategies/SmartStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/core/GameTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/GameTracker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/core/IPlayListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/IPlayListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/core/WhistGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/core/WhistGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/players/NPCPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/players/NPCPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whist/players/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/whist/players/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591255388888</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Finishing player history and game tracker">
+      <created>1591256323784</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1591256323784</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,7 +146,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/master" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -224,26 +216,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1590588095650" />
-    <state width="1877" height="229" key="GridCell.Tab.0.bottom" timestamp="1591255783135">
+    <state width="1877" height="229" key="GridCell.Tab.0.bottom" timestamp="1591256355032">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
-    <state width="1877" height="229" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591255783135" />
-    <state width="1877" height="229" key="GridCell.Tab.0.center" timestamp="1591255783135">
+    <state width="1877" height="229" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591256355032" />
+    <state width="1877" height="229" key="GridCell.Tab.0.center" timestamp="1591256355032">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
-    <state width="1877" height="229" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591255783135" />
-    <state width="1877" height="229" key="GridCell.Tab.0.left" timestamp="1591255783135">
+    <state width="1877" height="229" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591256355032" />
+    <state width="1877" height="229" key="GridCell.Tab.0.left" timestamp="1591256355031">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
-    <state width="1877" height="229" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591255783135" />
-    <state width="1877" height="229" key="GridCell.Tab.0.right" timestamp="1591255783135">
+    <state width="1877" height="229" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591256355031" />
+    <state width="1877" height="229" key="GridCell.Tab.0.right" timestamp="1591256355032">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1590592432010" />
-    <state width="1877" height="229" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591255783135" />
+    <state width="1877" height="229" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591256355032" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1590592432010">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
