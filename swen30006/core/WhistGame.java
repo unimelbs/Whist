@@ -172,7 +172,6 @@ public class WhistGame {
         //Subscribing new players to WhistGame events.
         for (Player p: players)
         {
-            System.out.println(p.toString());
             this.addPlayListener(p);
         }
     }

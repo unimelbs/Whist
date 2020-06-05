@@ -40,10 +40,8 @@ public class InteractablePlayer extends Player {
 		return selected;
 	}
 
-	//TODO Remove:
-
 	@Override
 	public String toString() {
-		return "Player["+this.playerNb+"](Human)(no strategy";
+		return "Player["+this.playerNb+"](Human) uses (no strategy).";
 	}
 }

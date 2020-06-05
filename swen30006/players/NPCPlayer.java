@@ -42,11 +42,8 @@ public class NPCPlayer extends Player {
 		this.strategy = strategy;
 	}
 
-	//TODO Remove
-
 	@Override
 	public String toString() {
-		return "Player["+this.playerNb+"](NPC)("+this.strategy.toString();
-		//super.toString()+"";
+		return "Player["+this.playerNb+"](NPC) uses ("+this.strategy.toString()+").";
 	}
 }
