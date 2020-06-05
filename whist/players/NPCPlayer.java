@@ -43,9 +43,9 @@ public class NPCPlayer extends Player {
 		return random;
 	}
 
-	public WhistGame.Suit getTrumps(){
-		return this.getGameHistory().getCurrentTrump();
-	}
+	//public WhistGame.Suit getTrumps(){
+	//	return this.getGameHistory().getCurrentTrump();
+	//}
 	public void setStrategy(IGameStrategy strategy){
 		this.strategy = strategy;
 	}
