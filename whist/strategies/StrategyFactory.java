@@ -4,6 +4,7 @@ package strategies;
  * A Factory used to create game strategy object.
  */
 public class StrategyFactory {
+
     private static StrategyFactory instance;
 
     /**

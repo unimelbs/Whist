@@ -5,7 +5,6 @@ import players.NPCPlayer;
 import players.Player;
 import strategies.IGameStrategy;
 import strategies.StrategyFactory;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,32 +17,38 @@ import java.util.Random;
  * available in whist.properties file
  */
 public class GameFactory {
-    private static final int MAX_NUMBER_OF_PLAYERS = 4;
+    private final int MAX_NUMBER_OF_PLAYERS = 4;
     // properties
-    private static int seed;
-    private static int nbHumanPlayers;
-    private static boolean enforceRules;
-    private static int nbRandomNPCPlayers;
-    private static int nbLegalNPCPlayers;
-    private static int nbStartCards;
-    private static int winningScore;
-    private static int nbSmartNPCPlayers;
-    private static boolean hideCards;
+    private int seed;
+    private int nbHumanPlayers;
+    private boolean enforceRules;
+    private int nbRandomNPCPlayers;
+    private int nbLegalNPCPlayers;
+    private int nbStartCards;
+    private int winningScore;
+    private int nbSmartNPCPlayers;
+    private boolean hideCards;
     // variables
-    private static WhistGame instance;
-    private static StrategyFactory strategyFactory;
-    private static Properties config;
-    private static String originalStrategyString;
-    private static String legalStrategyString;
-    private static String smartStrategyString;
-    private static ArrayList<Player> players;
-    private static IGameStrategy originalStrategy;
-    private static IGameStrategy legalStrategy;
-    private static IGameStrategy smartStrategy;
-    private static Random random;
+
+    private static GameFactory instance;
+    private WhistGame gameInstance;
+    private StrategyFactory strategyFactory;
+    private Properties config;
+    private String originalStrategyString;
+    private String legalStrategyString;
+    private String smartStrategyString;
+    private ArrayList<Player> players;
+    private IGameStrategy originalStrategy;
+    private IGameStrategy legalStrategy;
+    private IGameStrategy smartStrategy;
+    private Random random;
 
 
-    private static void loadConfig() throws IOException
+    /**
+     * Loads game configurations from the provided properties file.
+     * @throws IOException
+     */
+    private void loadConfig() throws IOException
     {
         config = new Properties();
         FileReader inStream = null;
@@ -74,7 +79,11 @@ public class GameFactory {
         }
     }
 
-    private static void loadStrategies()
+    /**
+     * Loads game strategies using StrategyFactory and strategy names as
+     * specified in the configuration file.
+     */
+    private void loadStrategies()
     {
         strategyFactory = StrategyFactory.getInstance();
         originalStrategy = strategyFactory.getStrategy(originalStrategyString);
@@ -82,7 +91,10 @@ public class GameFactory {
         smartStrategy = strategyFactory.getStrategy(smartStrategyString);
     }
 
-    private static void createGamePlayers()
+    /**
+     * Creates game players as per the configuration file.
+     */
+    private void createGamePlayers()
     {
         players = new ArrayList<Player>();
         int playerId=0;
@@ -115,20 +127,38 @@ public class GameFactory {
             playerId++;
         }
     }
-    public static WhistGame getInstance() throws IOException
+
+    /**
+     * Returns a Singleton of GameFactory.
+     * @return
+     */
+    public static GameFactory getInstance()
     {
-        loadConfig();
-        random = new Random(seed);
-        loadStrategies();
-        createGamePlayers();
-        if (players.size()!=MAX_NUMBER_OF_PLAYERS)
-        {
-            System.out.printf("Number of players (%d) is greater than the allowed maximum of 4. Exiting..\n",
-                    players.size());
-            System.exit(10);
-        }
-        instance = new WhistGame(players.size(), winningScore, nbStartCards, random, enforceRules, hideCards);
-        instance.addPlayers(players);
+        if (instance ==null) instance = new GameFactory();
         return instance;
+    }
+
+    /**
+     * Returns a Singleton of WhistGame.
+     * @return
+     * @throws IOException
+     */
+    public WhistGame getWhistGame() throws IOException
+    {
+        if (gameInstance==null) {
+            loadConfig();
+            random = new Random(seed);
+            loadStrategies();
+            createGamePlayers();
+            if (players.size()!=MAX_NUMBER_OF_PLAYERS)
+            {
+                System.out.printf("Number of players (%d) is greater than the allowed maximum of 4. Exiting..\n",
+                        players.size());
+                System.exit(10);
+            }
+            gameInstance = new WhistGame(players.size(), winningScore, nbStartCards, random, enforceRules, hideCards);
+            gameInstance.addPlayers(players);
+        }
+        return gameInstance;
     }
 }

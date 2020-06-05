@@ -2,9 +2,7 @@ package core;
 
 import ch.aplu.jcardgame.*;
 import exceptions.BrokeRuleException;
-import players.NPCPlayer;
 import players.Player;
-
 import java.util.*;
 
 

@@ -7,7 +7,7 @@ import java.io.IOException;
 public class Whist {
 
     public static void main(String[] args) throws IOException {
-        WhistGame game = GameFactory.getInstance();
+        WhistGame game = GameFactory.getInstance().getWhistGame();
         game.start();
     }
 }
