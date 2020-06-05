@@ -13,10 +13,8 @@ import java.util.Random;
 public class NPCPlayer extends Player {
 	//The strategy specified for the NPC player
 	private IGameStrategy strategy;
-	private WhistGame.Suit trumps = null;
 	public NPCPlayer(int playerNb) {
 		super(playerNb);
-
 	}
 	public NPCPlayer(int playerNb, Random random) {
 		super(playerNb,random);
@@ -38,11 +36,6 @@ public class NPCPlayer extends Player {
 	{
 		return random;
 	}
-
-	public void setTrumps(WhistGame.Suit trumps){
-		this.trumps = trumps;
-	}
-
 	public WhistGame.Suit getTrumps(){
 		return this.getGameHistory().getCurrentTrump();//trumps;
 	}
