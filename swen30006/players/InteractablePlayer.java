@@ -39,4 +39,11 @@ public class InteractablePlayer extends Player {
 		while (null == selected) UI.getInstance().delay(100);
 		return selected;
 	}
+
+	//TODO Remove:
+
+	@Override
+	public String toString() {
+		return "Player["+this.playerNb+"](Human)(no strategy";
+	}
 }

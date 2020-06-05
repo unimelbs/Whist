@@ -41,4 +41,12 @@ public class NPCPlayer extends Player {
 	public void setStrategy(IGameStrategy strategy){
 		this.strategy = strategy;
 	}
+
+	//TODO Remove
+
+	@Override
+	public String toString() {
+		return "Player["+this.playerNb+"](NPC)("+this.strategy.toString();
+		//super.toString()+"";
+	}
 }
