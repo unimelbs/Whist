@@ -36,15 +36,15 @@ public class UI extends CardGame {
     private Actor[] scoreActors = {null, null, null, null };
     final String trumpImage[] = {"bigspade.gif","bigheart.gif","bigdiamond.gif","bigclub.gif"};
     private Actor trumpsActor;
-    private static UI ui;
+    private static UI instance;
     private boolean hideCards;
 
     protected UI(String version, int nbPlayers, boolean hideCards){
         super(700, 700, 30);
-        if (ui != null){
+        if (instance != null){
             System.out.println("Singleton core.UI error");
         }
-        ui = this;
+        instance = this;
         this.hideCards = hideCards;
         setTitle("Whist (V" + version + ") Constructed for UofM SWEN30006 with JGameGrid (www.aplu.ch)");
         setStatus("Initializing...");
@@ -56,10 +56,10 @@ public class UI extends CardGame {
     }
 
     public static UI getInstance(){
-        if (ui == null){
+        if (instance == null){
             System.out.println("Singleton core.UI error");
         }
-        return ui;
+        return instance;
     }
 
     public void setStatus(String string) { setStatusText(string); }

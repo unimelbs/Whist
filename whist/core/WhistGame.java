@@ -68,7 +68,10 @@ public class WhistGame {
     }
 
 
-    // deal out cards using random from seed
+    /**
+     * Deals out cards using random from seed
+     * @return
+     */
     private Hand[] dealCards(){
         // Convert to hand for ease of access
         Hand deckAsHand = deck.toHand(false);
@@ -245,11 +248,4 @@ public class WhistGame {
             listener.onEndTrick(startingPlayer, winningPlayer, trick);
         }
     }
-
-    //Returns one random object to all players, to play the original play
-    public Random getRandom()
-    {
-        return this.random;
-    }
-
 }

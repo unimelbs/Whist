@@ -30,7 +30,7 @@ public class GameFactory {
     private static int nbSmartNPCPlayers;
     private static boolean hideCards;
     // variables
-    public static WhistGame instance;
+    private static WhistGame instance;
     private static StrategyFactory strategyFactory;
     private static Properties config;
     private static String originalStrategyString;
