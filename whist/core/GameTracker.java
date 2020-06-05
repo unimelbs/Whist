@@ -69,7 +69,16 @@ public class GameTracker {
         return numCardsInSuit;
     }
 
-    public boolean isShortedSuitedIn(int player, WhistGame.Suit suit){
+    public boolean isShortedSuitedIn(int player, WhistGame.Suit suit, Hand hand){
+        // look to see if all trump cards
+        int numCardsInSuit=deck.getNumberOfRanks();
+        numCardsInSuit-=getNumberOfCardsRemainingInSuit(suit);
+
+        // if all remaining trumps are in the player's hand than all other players are short suited
+        if (numCardsInSuit == hand.getNumberOfCardsWithSuit(suit)){
+            return false;
+        }
+        // check whether a player is short suited in this suit
         return playerHistories.get(player).shortSuitedIn(suit);
     }
 
