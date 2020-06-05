@@ -87,7 +87,7 @@ public class GameTracker {
 
     /**
      * Gets the ID of the current Winner (player with highest score).
-     *
+     * for future SmartStrategies.
      * @return
      */
     public int getCurrentWinnerId()
@@ -106,6 +106,10 @@ public class GameTracker {
     //Getters
     public WhistGame.Suit getCurrentTrump(){return this.currentTrump;}
 
+    /**
+     * Resets GameTracker's round related data.
+     * @param currentTrump
+     */
     public void newRound(WhistGame.Suit currentTrump){
         this.currentTrump = currentTrump;
         this.playerHistories = new ArrayList<PlayerHistory>();

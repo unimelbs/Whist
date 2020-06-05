@@ -2,7 +2,6 @@ package strategies;
 
 public class StrategyFactory {
     public static StrategyFactory instance;
-    private String defaultStrategy="original";
     public static StrategyFactory getInstance()
     {
         if (instance==null) instance = new StrategyFactory();

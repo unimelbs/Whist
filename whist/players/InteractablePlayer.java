@@ -2,7 +2,6 @@ package players;// LegalPlayer.java
 
 import ch.aplu.jcardgame.*;
 import core.UI;
-import core.WhistGame;
 
 @SuppressWarnings("serial")
 public class InteractablePlayer extends Player {

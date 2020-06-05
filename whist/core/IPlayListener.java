@@ -1,8 +1,6 @@
 package core;
 
-import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.Hand;
-import players.Player;
 
 /**
  * Represents a listener to WhistGame play.
