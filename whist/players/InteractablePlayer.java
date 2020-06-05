@@ -36,7 +36,7 @@ public class InteractablePlayer extends Player {
 	private Card getCardInput(){
 		selected = null;
 		hand.setTouchEnabled(true);
-		UI.getInstance().setStatus("players.Player 0 double-click on card to lead.");
+		UI.getInstance().setStatus("Double-click on a card to play it.");
 		while (null == selected) UI.getInstance().delay(100);
 		return selected;
 	}

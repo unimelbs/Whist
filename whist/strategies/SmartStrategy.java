@@ -36,14 +36,14 @@ public class SmartStrategy implements IGameStrategy {
                 }
             }
         }
-        return discard(player.getHand(),player.getTrumps());
+        return discard(player.getHand(),player.getGameHistory().getCurrentTrump());
     }
 
     @Override
     public Card getTurnCard(NPCPlayer player, Hand trick) {
 
         WhistGame.Suit lead = getLeadSuit(trick);
-        Card winningCard = getWinningCard(trick,player.getTrumps());
+        Card winningCard = getWinningCard(trick,player.getGameHistory().getCurrentTrump());
         // if player has suit
         if (player.getHand().getNumberOfCardsWithSuit(lead)>0){
             // if trick has not been trumped, player has a better card than winning card play the top card in lead suit
@@ -55,10 +55,10 @@ public class SmartStrategy implements IGameStrategy {
 
         // try to trump
         } else {
-            if (player.getHand().getNumberOfCardsWithSuit(player.getTrumps()) > 0){
-                return trump(player.getHand(), player.getTrumps());
+            if (player.getHand().getNumberOfCardsWithSuit(player.getGameHistory().getCurrentTrump()) > 0){
+                return trump(player.getHand(), player.getGameHistory().getCurrentTrump());
             } else {
-                return discard(player.getHand(),player.getTrumps());
+                return discard(player.getHand(),player.getGameHistory().getCurrentTrump());
             }
         }
     }

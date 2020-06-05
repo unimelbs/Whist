@@ -13,7 +13,7 @@ public class StrategyFactory {
     {
         try
         {
-            if(strategy!=null) return (IGameStrategy) Class.forName(strategy).newInstance();
+            if(strategy!=null) return (IGameStrategy) Class.forName(strategy).getDeclaredConstructor().newInstance();
         }
         catch (Exception e){
             e.printStackTrace();
