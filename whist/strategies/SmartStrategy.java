@@ -24,8 +24,8 @@ public class SmartStrategy implements IGameStrategy {
                 for (int i=0; i<WhistGame.nbPlayers-1; i++){
                     if (otherPlayer==WhistGame.nbPlayers){otherPlayer=0;} // reset the player
 
-                    if (player.getGameHistory().isShortedSuitedIn(otherPlayer, (WhistGame.Suit) card.getSuit())
-                        && !player.getGameHistory().isShortedSuitedIn(otherPlayer, player.getGameHistory().getCurrentTrump())) {
+                    if (player.getGameHistory().isShortedSuitedIn(otherPlayer, (WhistGame.Suit) card.getSuit(), player.getHand())
+                        && !player.getGameHistory().isShortedSuitedIn(otherPlayer, player.getGameHistory().getCurrentTrump(), player.getHand())) {
                         canTrump = true;
                         break;
                     }
