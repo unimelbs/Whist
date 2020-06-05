@@ -3,12 +3,7 @@ package core;
 import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.Deck;
 import ch.aplu.jcardgame.Hand;
-import players.Player;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
 
 /**
  * Helps smart player store information on other players, and contains helper functions for retrieving information
@@ -60,6 +55,13 @@ public class GameTracker {
         }
         return numCardsHigherThan;
     }
+
+    /**
+     * Returns total number of cards remaining in a Suit from player histories.
+     * for future Smarter Strategies.
+     * @param suit
+     * @return
+     */
     public int getNumberOfCardsRemainingInSuit(WhistGame.Suit suit){
 
         int numCardsInSuit = WhistGame.Rank.values().length;
@@ -103,9 +105,6 @@ public class GameTracker {
         return winningId;
     }
 
-    //Getters
-    public WhistGame.Suit getCurrentTrump(){return this.currentTrump;}
-
     /**
      * Resets GameTracker's round related data.
      * @param currentTrump
@@ -117,4 +116,7 @@ public class GameTracker {
             playerHistories.add(new PlayerHistory(deck, i));
         }
     }
+
+    //Getters
+    public WhistGame.Suit getCurrentTrump(){return this.currentTrump;}
 }
