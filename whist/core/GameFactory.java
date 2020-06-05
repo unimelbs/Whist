@@ -18,6 +18,7 @@ import java.util.Random;
  */
 public class GameFactory {
     private final int MAX_NUMBER_OF_PLAYERS = 4;
+    private final String PROPERTIES_FILE_NAME="whist.properties";
     // properties
     private int seed;
     private int nbHumanPlayers;
@@ -53,7 +54,7 @@ public class GameFactory {
         config = new Properties();
         FileReader inStream = null;
         try {
-            inStream = new FileReader("whist.properties");
+            inStream = new FileReader(PROPERTIES_FILE_NAME);
             config.load(inStream);
             nbSmartNPCPlayers = Integer.parseInt(config.getProperty("nbSmartNPCPlayers"));
             nbRandomNPCPlayers = Integer.parseInt(config.getProperty("nbRandomNPCPlayers"));
