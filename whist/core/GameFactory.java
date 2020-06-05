@@ -152,7 +152,7 @@ public class GameFactory {
             createGamePlayers();
             if (players.size()!=MAX_NUMBER_OF_PLAYERS)
             {
-                System.out.printf("Number of players (%d) is greater than the allowed maximum of 4. Exiting..\n",
+                System.out.printf("Number of players (%d) is not the expected number of 4. Exiting..\n",
                         players.size());
                 System.exit(10);
             }
