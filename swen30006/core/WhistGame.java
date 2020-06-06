@@ -108,7 +108,6 @@ public class WhistGame {
             // No restrictions on the card being lead
             lead = (WhistGame.Suit) selected.getSuit();
             selected.transfer(trick, true); // transfer to trick (includes graphic effect)
-            //Publishing CardPlayed event.
             winner = nextPlayer;
             winningCard = selected;
             // End Lead
@@ -146,7 +145,7 @@ public class WhistGame {
                 }
                 // End Follow
             }
-            //Publish trickWon event
+            //Publish EndTrick event
             publishEndTrick(leadingPlayer, winner, trick);
             ui.endTrick(trick, winner);
             nextPlayer = winner;
@@ -224,13 +223,13 @@ public class WhistGame {
 
     /**
      * Updates subscribers on Trump change.
-     * @param newTrump
+     * @param trumps
      */
-    private void publishNewRound(Suit newTrump)
+    private void publishNewRound(Suit trumps)
     {
         for (IPlayListener listener: playListeners)
         {
-            listener.onNewRound(newTrump);
+            listener.onNewRound(trumps);
         }
     }
 
