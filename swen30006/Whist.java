@@ -1,7 +1,5 @@
 import core.GameFactory;
 import core.WhistGame;
-
-import java.io.File;
 import java.io.IOException;
 
 // Whist.java

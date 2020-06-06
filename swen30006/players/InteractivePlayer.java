@@ -3,12 +3,15 @@ package players;// LegalPlayer.java
 import ch.aplu.jcardgame.*;
 import core.UI;
 
+/**
+ * Represents an Interactive player (a human player) that provides input to the game.
+ */
 @SuppressWarnings("serial")
-public class InteractablePlayer extends Player {
+public class InteractivePlayer extends Player {
 
 	private Card selected;
 
-	public InteractablePlayer(int playerNb) {
+	public InteractivePlayer(int playerNb) {
 		super(playerNb);
 	}
 

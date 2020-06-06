@@ -1,10 +1,12 @@
 package core;
 
-import players.InteractablePlayer;
+import players.InteractivePlayer;
 import players.NPCPlayer;
 import players.Player;
 import strategies.IGameStrategy;
 import strategies.StrategyFactory;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,7 +20,7 @@ import java.util.Random;
  */
 public class GameFactory {
     private final int MAX_NUMBER_OF_PLAYERS = 4;
-    private final String PROPERTIES_FILE_NAME="whist.properties";
+    private final String PROPERTIES_FILE_NAME= "whist.properties";
     // properties
     private int seed;
     private int nbHumanPlayers;
@@ -44,17 +46,36 @@ public class GameFactory {
     private IGameStrategy smartStrategy;
     private Random random;
 
-
     /**
      * Loads game configurations from the provided properties file.
      * @throws IOException
      */
     private void loadConfig() throws IOException
     {
+        //Checks the current working directory and changes properties file name accordingly
+        String workingDir = System.getProperty("user.dir");
+        String lastDirectory = workingDir.substring(workingDir.lastIndexOf(File.separator)+1);
+        String configFileName=PROPERTIES_FILE_NAME;
+        if (lastDirectory.equals("Whist"))
+        {
+            configFileName="swen30006"+File.separator+PROPERTIES_FILE_NAME;
+        }
+        else if(lastDirectory.equals("swen30006"))
+        {
+            configFileName=PROPERTIES_FILE_NAME;
+        }
+        //If the working directory is none of the expected values, informing the user and exiting.
+        else
+        {
+            System.out.println("Error: configuration file "+PROPERTIES_FILE_NAME+
+                    " is not available in the current working directory "+workingDir+
+                    " Please add the file.");
+            System.exit(10);
+        }
         config = new Properties();
         FileReader inStream = null;
         try {
-            inStream = new FileReader(PROPERTIES_FILE_NAME);
+            inStream = new FileReader(configFileName);
             config.load(inStream);
             nbSmartNPCPlayers = Integer.parseInt(config.getProperty("nbSmartNPCPlayers"));
             nbRandomNPCPlayers = Integer.parseInt(config.getProperty("nbRandomNPCPlayers"));
@@ -102,7 +123,7 @@ public class GameFactory {
         //Creating interactive (human) players
         for (int i=0;i<nbHumanPlayers;i++)
         {
-            InteractablePlayer p = new InteractablePlayer(playerId);
+            InteractivePlayer p = new InteractivePlayer(playerId);
             players.add(p);
             playerId++;
         }
