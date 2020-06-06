@@ -114,40 +114,44 @@ public class GameFactory {
     }
 
     /**
-     * Creates game players as per the configuration file.
+     * Creates game players as per the configuration file and as per the project specs.
      */
     private void createGamePlayers()
     {
         players = new ArrayList<Player>();
         int playerId=0;
-        //Creating interactive (human) players
+
+        //Creation order follows the specs
+        //1) Creating interactive (human) players
         for (int i=0;i<nbHumanPlayers;i++)
         {
             InteractivePlayer p = new InteractivePlayer(playerId);
             players.add(p);
             playerId++;
         }
-        //Creating random NPC players
-        for (int i = 0; i< nbRandomNPCPlayers; i++) {
-            NPCPlayer p = new NPCPlayer(playerId, random);
-            p.setStrategy(originalStrategy);
-            players.add(p);
-            playerId++;
-        }
-        //Creating legal NPC players
-        for (int i=0;i<nbLegalNPCPlayers;i++) {
-            NPCPlayer p = new NPCPlayer(playerId, random);
-            p.setStrategy(legalStrategy);
-            players.add(p);
-            playerId++;
-        }
-        //Creating smart NPC players
+        //2) Creating smart NPC players
         for (int i=0;i<nbSmartNPCPlayers;i++) {
             NPCPlayer p = new NPCPlayer(playerId);
             p.setStrategy(smartStrategy);
             players.add(p);
             playerId++;
         }
+        //3) Creating random NPC players
+        for (int i = 0; i< nbRandomNPCPlayers; i++) {
+            NPCPlayer p = new NPCPlayer(playerId, random);
+            p.setStrategy(originalStrategy);
+            players.add(p);
+            playerId++;
+        }
+        //4) Creating legal NPC players
+        for (int i=0;i<nbLegalNPCPlayers;i++) {
+            NPCPlayer p = new NPCPlayer(playerId, random);
+            p.setStrategy(legalStrategy);
+            players.add(p);
+            playerId++;
+        }
+        for (Player p: players) System.out.println("\t"+p);
+
     }
 
     /**
