@@ -18,7 +18,7 @@ import java.util.Random;
  */
 public class GameFactory {
     private final int MAX_NUMBER_OF_PLAYERS = 4;
-    private final String PROPERTIES_FILE_NAME="whist.properties";
+    private final String PROPERTIES_FILE_NAME="swen30006/whist.properties";
     // properties
     private int seed;
     private int nbHumanPlayers;
