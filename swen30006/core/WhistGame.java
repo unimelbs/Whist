@@ -5,7 +5,6 @@ import exceptions.BrokeRuleException;
 import players.Player;
 import java.util.*;
 
-
 /**
  * Represents a Whist game. Contains the game's logic and related data.
  */
